@@ -1,0 +1,11 @@
+{
+  "name": "my-money",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "Marcos Vinícius C. da Silva <marvinc.silva@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "src/*"
+  ]
+}
