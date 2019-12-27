@@ -1,0 +1,13 @@
+{
+  "name": "my-domain",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha './**/*.test.js' --check-leaks -c --recursive -S"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0",
+    "mocha": "^6.2.2"
+  }
+}
