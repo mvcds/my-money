@@ -26,4 +26,42 @@ describe('Entry Entity', function() {
       })
     });
   });
+
+  describe('#errors', () => {
+    describe('Value', () => {
+      const VALUE_ERRORS = [/Invalid entry value/]
+
+      describe('Number', () => {
+        const entry = new Entry({ value: random.number() })
+
+        it('Has no errors', () => {
+          assert.deepEqual(entry.errors, [])
+        })
+      })
+
+      describe('Emtpy', () => {
+        const entry = new Entry({})
+
+        it('Has an error', () => {
+          assert.deepEqual(entry.errors, VALUE_ERRORS)
+        })
+      })
+
+      describe('String as number', () => {
+        const entry = new Entry({ value: random.number().toString() })
+
+        it('Has an error', () => {
+          assert.deepEqual(entry.errors, VALUE_ERRORS)
+        })
+      })
+
+      describe('NaN', () => {
+        const entry = new Entry({ value: NaN })
+
+        it('Has an error', () => {
+          assert.deepEqual(entry.errors, VALUE_ERRORS)
+        })
+      })
+    })
+  })
 });

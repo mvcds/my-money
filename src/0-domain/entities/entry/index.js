@@ -11,6 +11,18 @@ function Entry({ id, source, value, isDisabled = false }) {
     }
   })
 
+  Object.defineProperty(this, 'errors', {
+    get() {
+      const errors = []
+
+      if (!value || (typeof value !== 'number' && !Number.isNaN(value))) {
+        errors.push(new Error('Invalid entry value'))
+      }
+
+      return errors
+    }
+  });
+
   return Object.freeze(this)
 }
 

@@ -10,7 +10,7 @@ class CreateEntry {
     try {
       await createEntryInProjection.call(this, projection, entry)
     } catch(e) {
-      this.presenter.onError(e)
+      this.presenter.onError(e.message)
     }
 
     this.presenter.onEnd();
