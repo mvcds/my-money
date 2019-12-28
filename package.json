@@ -9,8 +9,21 @@
     "src/*"
   ],
   "scripts": {
-    "test": "(cd src/0-domain && yarn test) && (cd src/1-use-cases && yarn test)",
+    "test": "yarn test:domain && yarn test:uc",
+    "test:domain": "cd src/0-domain && yarn test",
+    "test:uc": "cd src/1-use-cases && yarn test",
     "lint": "eslint src --max-warnings 5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": ["yarn lint --fix"],
+    "**/0-domain/*.js": ["yarn test:domain"],
+    "**/1-use-cases/*.js": ["yarn test:uc"],
+    "**/*.feature": ["yarn test"]
   },
   "devDependencies": {
     "eslint": "^6.8.0",
@@ -19,6 +32,8 @@
     "eslint-plugin-mocha": "^6.2.2",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0"
   }
 }

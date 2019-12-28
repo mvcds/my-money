@@ -33,13 +33,13 @@ describe('Entry Entity', function () {
 
   describe('#errors', function () {
     describe('Value', function () {
-      const VALUE_ERRORS = [/Invalid entry value/]
+      const VALUE_ERROR = 'Invalid entry value'
 
       describe('Number', function () {
         it('Has no errors', function () {
           const entry = new Entry({ value: random.number() })
 
-          assert.deepEqual(entry.errors, [])
+          assert.equal(entry.errors[0], undefined)
         })
       })
 
@@ -47,7 +47,7 @@ describe('Entry Entity', function () {
         it('Has an error', function () {
           const entry = new Entry({})
 
-          assert.deepEqual(entry.errors, VALUE_ERRORS)
+          assert.deepEqual(entry.errors[0].message, VALUE_ERROR)
         })
       })
 
@@ -55,7 +55,7 @@ describe('Entry Entity', function () {
         it('Has an error', function () {
           const entry = new Entry({ value: random.number().toString() })
 
-          assert.deepEqual(entry.errors, VALUE_ERRORS)
+          assert.deepEqual(entry.errors[0].message, VALUE_ERROR)
         })
       })
 
@@ -63,7 +63,7 @@ describe('Entry Entity', function () {
         it('Has an error', function () {
           const entry = new Entry({ value: NaN })
 
-          assert.deepEqual(entry.errors, VALUE_ERRORS)
+          assert.deepEqual(entry.errors[0].message, VALUE_ERROR)
         })
       })
     })
