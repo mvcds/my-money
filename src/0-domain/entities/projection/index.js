@@ -4,7 +4,12 @@ function Projection({ id, title, timestamp, entries: rawEntries }) {
   Object.assign(this, {
     id,
     title,
-    timestamp
+    timestamp,
+    addEntry(entry) {
+      if (entry.isDisabled) return
+
+      entries.push(entry)
+    }
   })
 
   Object.defineProperty(this, 'incoming', {

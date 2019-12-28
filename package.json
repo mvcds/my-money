@@ -9,6 +9,6 @@
     "src/*"
   ],
   "scripts": {
-    "test": "cd src/0-domain && yarn test"
+    "test": "(cd src/0-domain && yarn test) && (cd src/1-use-cases && yarn test)"
   }
 }
