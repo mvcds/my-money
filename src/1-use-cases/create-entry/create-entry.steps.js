@@ -35,6 +35,10 @@ Then('a new {string} is added to the projection', function (direction) {
   const { entry, projection, presenter } = this.world
 
   assert.deepEqual(projection[direction], [entry])
+});
+
+Then('the create-entry-presenter was called correctly', function () {
+  const { presenter } = this.world
 
   Object.values(presenter).forEach(mock => mock.verify())
 });

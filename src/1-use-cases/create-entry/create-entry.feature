@@ -7,6 +7,7 @@ Feature: Create Entry
     Given an enabled entry with value <value>
     When I create this entry
     Then a new <direction> is added to the projection
+      And the create-entry-presenter was called correctly
 
     Examples:
       | value | direction |
