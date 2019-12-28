@@ -1,13 +1,19 @@
-async function CreateEntry(projection, entry, presenter) {
-  presenter.onStart();
-
-  try {
-    projection.addEntry(entry)
-  } catch(e) {
-    presenter.onError(e)
+class CreateEntry {
+  constructor(presenter) {
+    this.presenter = presenter
   }
 
-  presenter.onEnd();
+  async execute(projection, entry) {
+    this.presenter.onStart();
+
+    try {
+      projection.addEntry(entry)
+    } catch(e) {
+      this.presenter.onError(e)
+    }
+
+    this.presenter.onEnd();
+  }
 }
 
 module.exports = CreateEntry

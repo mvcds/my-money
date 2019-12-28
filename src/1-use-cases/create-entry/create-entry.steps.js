@@ -5,7 +5,7 @@ const sinon = require('sinon');
 const Projection = require('my-domain/entities/projection')
 const EntryFactory = require('my-domain/entities/entry/entry.factory')
 
-const createEntry = require('./index')
+const CreateEntry = require('./index')
 
 Given('an enabled entry with value {int}', function (value) {
   const projection = new Projection({ entries: [] })
@@ -26,7 +26,9 @@ Given('an enabled entry with value {int}', function (value) {
 When('I create this entry', async function () {
   const { entry, projection, presenter } = this.world
 
-  await createEntry(projection, entry, presenter)
+  const uc = new CreateEntry(presenter)
+
+  await uc.execute(projection, entry)
 });
 
 Then('a new {string} is added to the projection', function (direction) {
