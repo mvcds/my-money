@@ -7,6 +7,7 @@
 1. Create UC layer
 1. Install things on domain layer `yarn workspace my-use-cases add sinon cucumber --dev`
 1. Cucumber required a forced "watcher"
+1. My editor was having a problem when eslint was not added
 
 # OBS
 

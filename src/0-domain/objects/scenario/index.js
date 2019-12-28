@@ -1,30 +1,30 @@
-function Scenario({ projection }) {
+function Scenario ({ projection }) {
   Object.assign(this, {
     projection
   })
 
   Object.defineProperty(this, 'incoming', {
-    get() {
+    get () {
       return read(this.projection.incoming)
     }
-  });
+  })
 
   Object.defineProperty(this, 'expenses', {
-    get() {
+    get () {
       return read(this.projection.expenses)
     }
-  });
+  })
 
   Object.defineProperty(this, 'difference', {
-    get() {
+    get () {
       return this.incoming.total - this.expenses.total
     }
-  });
+  })
 
   return this
 }
 
-function read(entries) {
+function read (entries) {
   const total = entries.reduce((number, { value }) => number + value, 0)
 
   return {

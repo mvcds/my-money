@@ -1,0 +1,18 @@
+env:
+  commonjs: true
+  es6: true
+  node: true
+extends:
+  - standard
+  - plugin:mocha/recommended
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+  describe: readonly
+  it: readonly
+  before: readonly
+parserOptions:
+  ecmaVersion: 2018
+plugins:
+  - mocha
+rules: {}

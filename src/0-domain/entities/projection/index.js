@@ -1,11 +1,11 @@
-function Projection({ id, title, timestamp, entries: rawEntries }) {
+function Projection ({ id, title, timestamp, entries: rawEntries }) {
   const entries = rawEntries.filter(({ isDisabled }) => !isDisabled)
 
   Object.assign(this, {
     id,
     title,
     timestamp,
-    addEntry(entry) {
+    addEntry (entry) {
       if (entry.isDisabled) return
 
       entries.push(entry)
@@ -13,16 +13,16 @@ function Projection({ id, title, timestamp, entries: rawEntries }) {
   })
 
   Object.defineProperty(this, 'incoming', {
-    get() {
-      return entries.filter(({ value }) => value > 0);
+    get () {
+      return entries.filter(({ value }) => value > 0)
     }
-  });
+  })
 
   Object.defineProperty(this, 'expenses', {
-    get() {
-      return entries.filter(({ value }) => value < 0);
+    get () {
+      return entries.filter(({ value }) => value < 0)
     }
-  });
+  })
 
   return Object.freeze(this)
 }

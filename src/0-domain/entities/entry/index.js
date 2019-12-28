@@ -1,10 +1,10 @@
-function Entry({ id, source, value, isDisabled = false }) {
+function Entry ({ id, source, value, isDisabled = false }) {
   Object.assign(this, {
     id,
     source,
     value,
     isDisabled,
-    share(total) {
+    share (total) {
       if (total < value) throw new Error('Share cannot be bigger than total')
 
       return value / total
@@ -12,7 +12,7 @@ function Entry({ id, source, value, isDisabled = false }) {
   })
 
   Object.defineProperty(this, 'errors', {
-    get() {
+    get () {
       const errors = []
 
       if (!value || (typeof value !== 'number' && !Number.isNaN(value))) {
@@ -21,7 +21,7 @@ function Entry({ id, source, value, isDisabled = false }) {
 
       return errors
     }
-  });
+  })
 
   return Object.freeze(this)
 }
