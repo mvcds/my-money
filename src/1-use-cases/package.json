@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js ./**/*.feature"
+    "test": "cucumber-js ./**/*.feature",
+    "test:watch": "yarn test && node watch-test.js"
   },
   "license": "MIT",
   "dependencies": {
@@ -11,6 +12,7 @@
   },
   "devDependencies": {
     "cucumber": "^6.0.5",
+    "node-watch": "^0.6.3",
     "sinon": "^8.0.1"
   }
 }
