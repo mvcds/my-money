@@ -8,6 +8,7 @@ Feature: Create Entry
     When I create this entry
     Then a new <direction> is added to the projection
       And the create-entry-presenter was called correctly
+      And the projection is associated with entry
 
     Examples:
       | value | direction |
