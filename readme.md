@@ -5,7 +5,7 @@
 1. Install things on domain layer `yarn workspace my-domain add faker mocha --dev`
 1. The domain layer required factories when references were used within the project
 1. Create UC layer
-1. Install things on domain layer `yarn workspace my-use-cases add sinon cucumber --dev`
+1. Install things on UC layer `yarn workspace my-use-cases add sinon cucumber --dev`
 1. Cucumber required a forced "watcher"
 1. My editor was having a problem when eslint was not added
 
