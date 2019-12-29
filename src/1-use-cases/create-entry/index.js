@@ -5,10 +5,11 @@ const DEPENDENCIES = {
 
 class CreateEntry {
   constructor (presenter, storage, injection) {
-    this.presenter = presenter
-    this.storage = storage
-
-    this.__injection = { ...DEPENDENCIES, ...injection }
+    this.execute = this.execute.bind({
+      presenter,
+      storage,
+      injection: { ...DEPENDENCIES, ...injection }
+    })
   }
 
   async execute () {
@@ -26,7 +27,7 @@ class CreateEntry {
 }
 
 async function create () {
-  const { Entry, Projection } = this.__injection
+  const { Entry, Projection } = this.injection
   const { projectionId, entry: data } = this.presenter
 
   const newEntry = new Entry(data)
