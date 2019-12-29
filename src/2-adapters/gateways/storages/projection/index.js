@@ -14,9 +14,9 @@ function ProjectionStorage (oldProjections = {}, injection) {
         throw new Error('Missing ID when reading by ID')
       }
 
-      const { drive } = dependencies
+      const { drive: projectionDrive } = dependencies
 
-      const projection = await drive.read({ id })
+      const projection = await projectionDrive.read({ id })
 
       projections[id] = projection
 
@@ -33,9 +33,9 @@ function ProjectionStorage (oldProjections = {}, injection) {
         throw new Error('Unkown projection canot be updated')
       }
 
-      const { drive } = dependencies
+      const { drive: projectionDrive } = dependencies
 
-      await drive.update(target)
+      await projectionDrive.update(target)
 
       projections[target.id] = target
     }
