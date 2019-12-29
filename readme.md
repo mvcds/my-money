@@ -13,6 +13,7 @@ Something I was writing about on [Code Thoughts][2]
 1. Create UC layer
 1. Cucumber required a forced "watcher"
 1. My editor was having a problem when eslint was not added
+1. The need of a proof file was necessary to help me manage complexity i.e. checking if the code was working outside of a testing environment
 1. Clean architecture was improved after feedback
 1. Create adapters layer
 
