@@ -7,26 +7,26 @@ const Storage = require('./index')
 describe('Entry Storage', function () {
   describe('#createEntry', function () {
     let id
-    let driver
+    let drive
     let storage
     let result
     before(async function () {
       id = random.uuid()
 
-      driver = {
+      drive = {
         create: sinon.mock()
           .once()
           .withExactArgs(id)
           .resolves({ id })
       }
 
-      storage = new Storage({}, { driver })
+      storage = new Storage({}, { drive })
 
       result = await storage.createEntry(id)
     })
 
     it('Creates the entry', function () {
-      driver.create.verify()
+      drive.create.verify()
     })
 
     it('Keeps the entry on storage', function () {

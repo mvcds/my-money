@@ -10,9 +10,9 @@ function EntryStorage (oldEntries = {}, injection) {
 
   return Object.assign(this, {
     async createEntry (data) {
-      const { driver } = dependencies
+      const { drive } = dependencies
 
-      const entry = await driver.create(data)
+      const entry = await drive.create(data)
 
       entries[entry.id] = entry
 
