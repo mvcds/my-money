@@ -8,6 +8,7 @@ class CreateEntry {
     this.presenter.onStart()
 
     try {
+      // mimic private method
       await createEntryInProjection.call(this, projection, entry)
     } catch (e) {
       this.presenter.onError(e.message)
