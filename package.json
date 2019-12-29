@@ -9,9 +9,10 @@
     "src/*"
   ],
   "scripts": {
-    "test": "yarn test:domain && yarn test:uc",
+    "test": "yarn test:domain && yarn test:uc && yarn test:adapters",
     "test:domain": "cd src/0-domain && yarn test",
     "test:uc": "cd src/1-use-cases && yarn test",
+    "test:adapters": "cd src/2-adapters/ && yarn test",
     "lint": "eslint src --max-warnings 5"
   },
   "husky": {
@@ -23,6 +24,7 @@
     "**/*.js": ["yarn lint --fix"],
     "**/0-domain/*.js": ["yarn test:domain"],
     "**/1-use-cases/*.js": ["yarn test:uc"],
+    "**/2-adapters/*.js": ["yarn test:adapters"],
     "**/*.feature": ["yarn test"]
   },
   "devDependencies": {

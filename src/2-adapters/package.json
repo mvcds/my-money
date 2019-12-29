@@ -1,0 +1,17 @@
+{
+  "name": "my-adapters",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha './**/*.test.js' --check-leaks -c --recursive -S"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "my-use-cases": "0.0.0"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0",
+    "mocha": "^6.2.2",
+    "sinon": "^8.0.1"
+  }
+}
