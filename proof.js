@@ -19,6 +19,9 @@ const entryDrive = {
   async create () {
     entry.id = 'fake'
     return entry
+  },
+  async readAll () {
+    return []
   }
 }
 const projectionDrive = {
@@ -26,6 +29,9 @@ const projectionDrive = {
     return projection
   },
   async update () {
+  },
+  async readAll () {
+    return []
   }
 }
 
@@ -33,24 +39,17 @@ const app = {
   notifier: {
     onError: (msg) => console.log('error', msg)
   },
-  valuesOf (name) {
-    if (name === 'ProjectionStorage') return { default: projection }
-    return {}
-  },
-  driveOf (name) {
-    if (name === 'EntryStorage') return entryDrive
-    if (name === 'ProjectionStorage') return projectionDrive
-    return {}
-  }
+  storage: new Storage({
+    entry: entryDrive,
+    projection: projectionDrive
+  })
 }
 
 /* Actual Proof */
-const storage = new Storage(app)
+app.storage.init().then(async () => {
+  const controller = new CreateEntry(app)
 
-app.storage = storage
+  await controller.create(entry)
 
-const controller = new CreateEntry(app)
-
-controller.create(entry).then(() => {
-  console.log(storage.projections[0].incoming)
+  console.log(app.storage.projections[0].incoming)
 })

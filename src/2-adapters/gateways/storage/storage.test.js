@@ -1,27 +1,52 @@
 const assert = require('assert')
 const { random } = require('faker')
+const sinon = require('sinon')
 
 const Storage = require('./index')
+const ProjectionStorage = require('./projection')
 
 describe('Storage', function () {
-  // I was lazy to proper unit test this
-  // so I'll just make sure that a tested getter works as expected when "glued"
-  it('Contains the initial values', function () {
-    const id = random.uuid()
+  describe('#init', function () {
+    describe('No drive provided', function () {
+      it('Throws for missing drive', async function () {
+        const driveless = random.uuid()
 
-    const oldProjection = { id }
+        const storage = new Storage({
+        }, {
+          storages: {
+            driveless
+          }
+        })
 
-    const app = {
-      valuesOf () {
-        return { [id]: oldProjection }
-      },
-      driveOf () {
-        return {}
-      }
-    }
+        await assert.rejects(async () => {
+          await storage.init()
+        }, `A drive for ${driveless} was not found`)
+      })
+    })
 
-    const storage = new Storage(app)
+    describe('Match of drive and storage', function () {
+      it('Contains the initial values', async function () {
+        const id = random.uuid()
 
-    assert.deepEqual(storage.projections, [oldProjection])
+        const oldProjection = { id }
+
+        const storage = new Storage({
+          projection: {
+            readAll: sinon.mock('projection')
+              .once()
+              .withExactArgs()
+              .resolves([oldProjection])
+          }
+        }, {
+          storages: {
+            projection: ProjectionStorage
+          }
+        })
+
+        await storage.init()
+
+        assert.deepEqual(storage.projections, [oldProjection])
+      })
+    })
   })
 })
