@@ -4,10 +4,10 @@ import FixedValues from './fixed-values'
 
 import './financial-scenario.css';
 
-function FinancialScenario({ onCreateEntry = () => console.log('create') }) {
+function FinancialScenario({ scenario, onCreateEntry }) {
   return (
     <React.Fragment>
-      <FixedValues />
+      <FixedValues scenario={scenario} />
       <button className="financial__create-button" onClick={onCreateEntry}>
         Create Random Entry
       </button>

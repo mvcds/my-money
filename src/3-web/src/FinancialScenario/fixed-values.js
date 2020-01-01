@@ -1,18 +1,6 @@
 import React from 'react';
 
-const data = {
-  incoming: {
-    entries: [],
-    total: 0
-  },
-  expenses: {
-    entries: [],
-    total: 0
-  },
-  difference: 0
-}
-
-function FixedValues({ scenario = data }) {
+function FixedValues({ scenario }) {
   return (
     <table className="financial__values">
       <thead>
