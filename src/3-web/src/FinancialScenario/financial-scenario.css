@@ -1,0 +1,10 @@
+.financial__values {
+  margin-bottom: 2rem;
+  width: 50%;
+}
+
+.financial__create-button {
+  width: 50%;
+  font-size: 1rem;
+  padding: 1rem;
+}

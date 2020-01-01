@@ -2,27 +2,19 @@ import React from 'react';
 
 const data = {
   incoming: {
-    entries: [
-      { id: 1, source: 'one', value: 10, isDisabled: false, share: 1/4 },
-      { id: 2, source: 'two', value: 20, isDisabled: true, share: 0 },
-      { id: 3, source: 'three', value: 30, isDisabled: false, share: 3/4 },
-    ],
-    total: 40
+    entries: [],
+    total: 0
   },
   expenses: {
-    entries: [
-      { id: 4, source: 'cheap', value: -1, isDisabled: false, share: 1/17 },
-      { id: 5, source: 'unnecessary', value: -4, isDisabled: true, share: 0 },
-      { id: 7, source: 'expensive', value: -16, isDisabled: false, share: 16/17 },
-    ],
-    total: 17
+    entries: [],
+    total: 0
   },
-  difference: 23
+  difference: 0
 }
 
 function FixedValues({ scenario = data }) {
   return (
-    <table>
+    <table className="financial__values">
       <thead>
         <tr>
           <th colSpan="4">Fixed Values</th>
@@ -83,9 +75,11 @@ function Entry({ id, source, value, isDisabled, share }) {
 }
 
 function Percentage({ value }) {
+  const percentage = parseInt((value * 100).toFixed(2), 10)
+
   return (
     <td>
-      {parseInt((value * 100).toFixed(2), 10)} %
+      {Number.isNaN(percentage) ? 0 : percentage} %
     </td>
   )
 }
