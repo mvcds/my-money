@@ -11,12 +11,12 @@ const storage = new Storage({
 
       list[entry.id] = entry
 
-      localStorage.setItem('my-money:data:entries', JSON.stringify(list))
+      localStorage.setItem('my-money/entries', JSON.stringify(list))
 
       return entry
     },
     async readAll () {
-      const entries = localStorage.getItem('my-money:data:entries') || '{}'
+      const entries = localStorage.getItem('my-money/entries') || '{}'
 
       return JSON.parse(entries)
     }
@@ -32,10 +32,10 @@ const storage = new Storage({
 
       if (!projections[data.id]) return
 
-      localStorage.setItem('my-money:data:projections', JSON.stringify(projections))
+      localStorage.setItem('my-money/projections', JSON.stringify(projections))
     },
     async readAll () {
-      const projections = localStorage.getItem('my-money:data:projections')
+      const projections = localStorage.getItem('my-money/projections')
 
       if (projections === null) {
         const firstRun = {
@@ -46,7 +46,7 @@ const storage = new Storage({
           }
         }
 
-        localStorage.setItem('my-money:data:projections', JSON.stringify(firstRun))
+        localStorage.setItem('my-money/projections', JSON.stringify(firstRun))
 
         return firstRun
       }
