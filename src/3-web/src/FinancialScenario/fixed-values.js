@@ -43,7 +43,7 @@ function Group({ entries: { entries, total }, name }) {
       {entries.map(Entry)}
       <tr>
         <th colSpan="3">{name}</th>
-        <td>${Math.abs(total)}</td>
+        <Money value={total} />
       </tr>
     </React.Fragment>
   )
@@ -53,7 +53,7 @@ function Entry({ id, source, value, isDisabled, share }) {
   return (
     <tr key={id}>
       <td>{source}</td>
-      <td>${Math.abs(value)}</td>
+      <Money value={value} />
       <Percentage value={share} />
       <td>
         <input type="checkbox" checked={isDisabled} disabled />
@@ -68,6 +68,16 @@ function Percentage({ value }) {
   return (
     <td>
       {Number.isNaN(percentage) ? 0 : percentage} %
+    </td>
+  )
+}
+
+function Money({ value }) {
+  const money = value.toFixed(2)
+
+  return (
+    <td>
+      ${Number.isNaN(money) ? 0 : Math.abs(money)}
     </td>
   )
 }
