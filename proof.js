@@ -49,7 +49,13 @@ const app = {
 app.storage.init().then(async () => {
   const controller = new CreateEntry(app)
 
-  await controller.create(entry)
+  await controller.create({
+    onStart: Function.prototype,
+    onError: Function.prototype,
+    onEnd: Function.prototype,
+    projectionId: 'default',
+    entry
+  })
 
   console.log(app.storage.projections[0].incoming)
 })

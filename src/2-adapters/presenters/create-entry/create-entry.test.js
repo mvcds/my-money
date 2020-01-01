@@ -32,41 +32,6 @@ describe('Create Entry Presenter', function () {
     })
   })
 
-  describe('Changing values', function () {
-    describe("Projection's ID", function () {
-      it('Changes projectionId', function () {
-        const projectionId = random.uuid()
-        const presenter = new Presenter(null)
-
-        presenter.projectionId = projectionId
-
-        assert.equal(presenter.projectionId, projectionId)
-      })
-    })
-
-    describe("Entry's value", function () {
-      it('Changes the value', function () {
-        const value = random.uuid()
-        const presenter = new Presenter()
-
-        presenter.onChangeValue(value)
-
-        assert.equal(presenter.entry.value, value)
-      })
-    })
-
-    describe("Entry's source", function () {
-      it('Changes the souce', function () {
-        const source = random.uuid()
-        const presenter = new Presenter()
-
-        presenter.onChangeSource(source)
-
-        assert.equal(presenter.entry.source, source)
-      })
-    })
-  })
-
   describe('#onStart', function () {
     describe('Not started', function () {
       it('Starts creating', function () {

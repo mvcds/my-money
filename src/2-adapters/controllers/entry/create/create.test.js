@@ -5,41 +5,26 @@ const Controller = require('./index')
 
 describe('Create Entry Controller', function () {
   describe('#create', function () {
-    let presenter
+    let UseCase
     let uc
     before(async function () {
-      const value = random.uuid()
-      const source = random.uuid()
-
-      presenter = {
-        onChangeValue: sinon.mock('onChangeValue')
-          .once()
-          .withExactArgs(value),
-        onChangeSource: sinon.mock('onChangeSource')
-          .once()
-          .withExactArgs(source),
-        onStart: Function.prototype,
-        onError: Function.prototype,
-        onEnd: Function.prototype
+      const presenter = {
+        value: random.uuid,
+        source: random.uuid
       }
       uc = {
         execute: sinon.mock().once('uc').withExactArgs()
       }
 
-      const controller = new Controller({}, {
-        UseCase: sinon.stub().returns(uc),
-        Presenter: sinon.stub().returns(presenter)
-      })
+      UseCase = sinon.mock('UseCase').withExactArgs(presenter, sinon.match.any).returns(uc)
 
-      await controller.create({ value, source })
+      const controller = new Controller({}, { UseCase })
+
+      await controller.create(presenter)
     })
 
-    it('Changes the value', function () {
-      presenter.onChangeValue.verify()
-    })
-
-    it('Changes the source', function () {
-      presenter.onChangeSource.verify()
+    it('Creates the use case', function () {
+      UseCase.verify()
     })
 
     it('Executes the use case', function () {
