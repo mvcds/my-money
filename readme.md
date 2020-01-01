@@ -17,6 +17,9 @@ Something I was writing about on [Code Thoughts][2]
 1. Clean architecture was improved after feedback
 1. Create adapters layer
 1. Create external layer (web)
+1. Web's tests were turn off for faster setup of project
+1. The adapter layer was overly complicated, then it was simplified
+1. It's possible to see new entries on the `localStorage` if you go to the application tab on dev tools
 
 ## OBS
 
