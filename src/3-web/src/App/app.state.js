@@ -13,13 +13,12 @@ function AppState({ app }) {
     })
   }, [app]);
 
-  return <Component isLoading={isLoading} />
+  return <Component isLoading={isLoading} onCreateEntry={app.createEntry} />
 }
 
 async function init(app, onSuccess, onFailure) {
   try {
     await app.storage.init()
-    await app.createEntry({})
     onSuccess()
   } catch(e) {
     console.log(e)

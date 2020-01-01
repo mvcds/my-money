@@ -3,11 +3,11 @@ import './app.css';
 
 import FinancialScenario from './FinancialScenario'
 
-function App({ isLoading }) {
+function App({ isLoading, onCreateEntry }) {
   return (
     <div className="App">
       <main className="App-main">
-        {isLoading ? <Loading /> : <FinancialScenario />}
+        {isLoading ? <Loading /> : <FinancialScenario onCreateEntry={onCreateEntry} />}
       </main>
     </div>
   );

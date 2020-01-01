@@ -14,27 +14,24 @@ const data = {
   difference: 0
 }
 
-function FinancialScenarioState() {
-  const [scenario, setScenario] = useState(data);
+function FinancialScenarioState({ onCreateEntry }) {
+  const [projectionId] = useState('default');
+  const [scenario] = useState(data);
 
-  const onCreateEntry = () => {
-    const copy = { ...scenario }
-    const entry = {
-      id: Date.now(),
-      source: 'fake',
-      value: Math.random() * 10,
-      isDisabled: true,
-      share: 0
-    }
-
-    const values = Math.random() > .5 ? copy.incoming : copy.expenses
-
-    values.entries.push(entry)
-
-    setScenario(copy)
+  const handleCreation = async () => {
+    await onCreateEntry({
+      onStart: () => console.log('creating...'),
+      onError: (e) => console.log(e),
+      onEnd: () => console.log('created!'),
+      projectionId,
+      entry: {
+        source: 'fake',
+        value: Math.random() * 10
+      }
+    })
   }
 
-  return <Component scenario={scenario} onCreateEntry={onCreateEntry} />
+  return <Component scenario={scenario} onCreateEntry={handleCreation} />
 }
 
 export default FinancialScenarioState
