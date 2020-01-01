@@ -16,9 +16,10 @@ function AppState({ app }) {
   return <Component isLoading={isLoading} />
 }
 
-async function init({ storage }, onSuccess, onFailure) {
+async function init(app, onSuccess, onFailure) {
   try {
-    await storage.init()
+    await app.storage.init()
+    await app.createEntry({})
     onSuccess()
   } catch(e) {
     console.log(e)
