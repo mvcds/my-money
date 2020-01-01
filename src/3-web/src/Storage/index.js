@@ -1,9 +1,17 @@
 import Storage  from 'my-adapters/gateways/storage'
 
+const app = {
+  nextEntryId() {
+    const next = JSON.parse(localStorage.getItem('my-money/app/nextEntryId') || 0) + 1
+    localStorage.setItem('my-money/app/nextEntryId', next)
+    return next
+  }
+}
+
 const storage = new Storage({
   entry: {
     async create (data) {
-      const entry = { ...data, id: Date.now() }
+      const entry = { ...data, id: app.nextEntryId() }
 
       const list = await this.readAll()
 
