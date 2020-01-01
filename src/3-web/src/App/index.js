@@ -1,3 +1,3 @@
-import Component from  './app.visual'
+import Component from  './app.state'
 
 export default Component

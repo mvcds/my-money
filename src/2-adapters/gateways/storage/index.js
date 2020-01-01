@@ -1,23 +1,9 @@
-var fs = require('fs')
-
-function readSiblingFolders () {
-  return fs.readdirSync(__dirname)
-    .reduce((all, item) => {
-      const path = `${__dirname}/${item}`
-
-      if (!fs.lstatSync(path).isDirectory()) {
-        return all
-      }
-
-      return {
-        ...all,
-        [item]: require(path)
-      }
-    }, {})
-}
-
+//  reading dynamically would prevent web apps from being developed =/
 const DEPENDENCIES = {
-  storages: readSiblingFolders()
+  storages: {
+    entry: require('./entry'),
+    projection: require('./projection')
+  }
 }
 
 function Storage (containerForDrives, injection) {
