@@ -13,7 +13,7 @@ function AppState({ app }) {
     })
   }, [app]);
 
-  return <Component isLoading={isLoading} onCreateEntry={app.createEntry} />
+  return <Component isLoading={isLoading} onCreateEntry={app.createEntry} onReadScenario={app.readScenario} />
 }
 
 async function init(app, onSuccess, onFailure) {

@@ -1,22 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Component from  './financial-scenario.visual'
 
-const data = {
-  incoming: {
-    entries: [],
-    total: 0
-  },
-  expenses: {
-    entries: [],
-    total: 0
-  },
-  difference: 0
-}
-
-function FinancialScenarioState({ onCreateEntry }) {
+function FinancialScenarioState({ onCreateEntry, onReadScenario }) {
   const [projectionId] = useState('default');
-  const [scenario] = useState(data);
+  const [scenario, setScenario] = useState(null);
+
+  useEffect(() => {
+    onReadScenario(projectionId)
+      .then(setScenario)
+      .catch(x => console.log(x))
+  }, [onReadScenario, projectionId]);
 
   const handleCreation = async () => {
     await onCreateEntry({

@@ -5,6 +5,10 @@ import FixedValues from './fixed-values'
 import './financial-scenario.css';
 
 function FinancialScenario({ scenario, onCreateEntry }) {
+  if (!scenario) {
+    return <Loading />
+  }
+
   return (
     <React.Fragment>
       <FixedValues scenario={scenario} />
@@ -14,5 +18,10 @@ function FinancialScenario({ scenario, onCreateEntry }) {
     </React.Fragment>
   )
 }
+
+function Loading() {
+  return (<span>LOADING...</span>)
+}
+
 
 export default FinancialScenario

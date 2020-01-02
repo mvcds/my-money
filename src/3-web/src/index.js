@@ -14,8 +14,20 @@ const app = {
     onError: (msg) => console.log('error', msg)
   },
 }
+const fakeScenario = {
+  incoming: {
+    entries: [],
+    total: 0
+  },
+  expenses: {
+    entries: [],
+    total: 0
+  },
+  difference: 0
+}
 
 app.createEntry = new CreateEntry(app).create
+app.readScenario = () => Promise.resolve(fakeScenario)
 
 ReactDOM.render(<App app={app} />, document.getElementById('root'));
 
