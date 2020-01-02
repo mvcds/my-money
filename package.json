@@ -9,6 +9,7 @@
     "src/*"
   ],
   "scripts": {
+    "web": "cd src/3-web/ && yarn start",
     "test": "yarn test:domain && yarn test:uc && yarn test:adapters && yarn test:web",
     "test:domain": "cd src/0-domain && yarn test",
     "test:uc": "cd src/1-use-cases && yarn test",
