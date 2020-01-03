@@ -32,15 +32,15 @@ async function create () {
 
   const newEntry = new Entry(data)
 
-  const [projection, entry] = await Promise.all([
+  const [projectionData, entry] = await Promise.all([
     this.storage.readProjectionById(projectionId),
     this.storage.createEntry(newEntry)
   ])
 
-  const updatedProjection = new Projection(projection)
+  const projection = new Projection(projectionData)
 
-  updatedProjection.addEntry(entry)
+  projection.addEntry(entry)
 
-  await this.storage.updateProjection(updatedProjection)
+  await this.storage.updateProjection(projection)
 }
 module.exports = CreateEntry
