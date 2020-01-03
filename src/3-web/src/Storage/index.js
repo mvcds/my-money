@@ -24,28 +24,28 @@ const storage = new Storage({
       return entry
     },
     async readAll () {
-      const entries = localStorage.getItem('my-money/entries') || '{}'
+      const all = localStorage.getItem('my-money/entries') || '{}'
 
-      return JSON.parse(entries)
+      return JSON.parse(all)
     }
   },
   projection: {
     async read ({ id }) {
-      const projections = await this.readAll()
+      const all = await this.readAll()
 
-      return projections[id]
+      return all[id]
     },
     async update (data) {
-      const projections = await this.readAll()
+      const all = await this.readAll()
 
-      if (!projections[data.id]) return
+      if (!all[data.id]) return
 
-      localStorage.setItem('my-money/projections', JSON.stringify(projections))
+      localStorage.setItem('my-money/projections', JSON.stringify(all))
     },
     async readAll () {
-      const projections = localStorage.getItem('my-money/projections')
+      const all = localStorage.getItem('my-money/projections')
 
-      if (projections === null) {
+      if (all === null) {
         const firstRun = {
           default: {
             id: 'default',
@@ -59,7 +59,7 @@ const storage = new Storage({
         return firstRun
       }
 
-      return JSON.parse(projections)
+      return JSON.parse(all)
     }
   }
 })
