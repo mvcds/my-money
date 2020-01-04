@@ -29,7 +29,7 @@ function FixedValues({ scenario }) {
       <tfoot>
         <tr>
           <th colSpan="2">Yours</th>
-          <td>${scenario.difference}</td>
+          <Money value={scenario.difference} />
           <Percentage value={scenario.difference / scenario.incoming.total} />
         </tr>
       </tfoot>
