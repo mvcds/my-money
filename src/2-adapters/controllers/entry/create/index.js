@@ -5,12 +5,10 @@ const DEPENDENCIES = {
 function CreateEntryController (app, injection) {
   const { UseCase } = { ...DEPENDENCIES, ...injection }
 
-  Object.assign(this, {
-    async create (presenter) {
-      const uc = new UseCase(presenter, app.storage)
+  const uc = new UseCase(app.storage)
 
-      await uc.execute()
-    }
+  Object.assign(this, {
+    create: uc.execute
   })
 }
 

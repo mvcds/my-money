@@ -12,11 +12,12 @@ describe('Create Entry Controller', function () {
         value: random.uuid,
         source: random.uuid
       }
+
       uc = {
-        execute: sinon.mock().once('uc').withExactArgs()
+        execute: sinon.mock().once('uc').withExactArgs(presenter)
       }
 
-      UseCase = sinon.mock('UseCase').withExactArgs(presenter, sinon.match.any).returns(uc)
+      UseCase = sinon.mock('UseCase').withExactArgs(sinon.match.any).returns(uc)
 
       const controller = new Controller({}, { UseCase })
 

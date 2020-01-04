@@ -83,9 +83,9 @@ Given('no errors when trying to create the entry', function () {
 When('I create the entry', async function () {
   const { presenter, storage, injection } = this.world
 
-  const uc = new CreateEntry(presenter, storage, injection)
+  const uc = new CreateEntry(storage, injection)
 
-  await uc.execute()
+  await uc.execute(presenter)
 })
 
 Then('creating a new entry fails', function () {

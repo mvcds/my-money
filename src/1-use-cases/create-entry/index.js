@@ -4,31 +4,29 @@ const DEPENDENCIES = {
 }
 
 class CreateEntry {
-  constructor (presenter, storage, injection) {
+  constructor (storage, injection) {
     this.execute = this.execute.bind({
-      presenter,
       storage,
       injection: { ...DEPENDENCIES, ...injection }
     })
   }
 
-  async execute () {
-    this.presenter.onStart()
+  async execute (presenter) {
+    presenter.onStart()
 
     try {
       // mimic private method
-      await create.call(this)
+      await create.call(this, presenter)
     } catch (e) {
-      this.presenter.onError(e)
+      presenter.onError(e)
     }
 
-    this.presenter.onEnd()
+    presenter.onEnd()
   }
 }
 
-async function create () {
+async function create ({ projectionId, entry: data }) {
   const { Entry, Projection } = this.injection
-  const { projectionId, entry: data } = this.presenter
 
   const newEntry = new Entry(data)
 
