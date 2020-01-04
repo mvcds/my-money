@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NotificationManager } from 'react-notifications';
 
 import Component from  './financial-scenario.visual'
 
@@ -8,9 +9,9 @@ function FinancialScenarioState({ onCreateEntry, onReadScenario }) {
 
   useEffect(() => {
     onReadScenario({
-      onStart: () => console.log('scenario?'),
+      onStart: Function.prototype,
       onError: (e) => console.log('scenario', e),
-      onEnd: () => console.log('scenario!'),
+      onEnd: Function.prototype,
       onSuccess: setScenario,
       projectionId
     })
@@ -19,16 +20,23 @@ function FinancialScenarioState({ onCreateEntry, onReadScenario }) {
   const handleCreation = async () => {
     const value = parseFloat((Math.random() * 10).toFixed(2))
 
-    await onCreateEntry({
-      onStart: () => console.log('creating...'),
-      onError: (e) => console.log('creating', e),
-      onEnd: () => console.log('created!'),
-      projectionId,
-      entry: {
-        source: 'fake',
-        value
-      }
-    })
+    const trial = async () => {
+      await onCreateEntry({
+        onStart: Function.prototype,
+        onError: (e) => {
+          NotificationManager.error('Click here to retry', 'Creating entry failed', 5000, trial, true);
+          console.log(e)
+        },
+        onEnd: Function.prototype,
+        projectionId,
+        entry: {
+          source: 'fake',
+          value
+        }
+      })
+    }
+
+    trial()
   }
 
   return <Component scenario={scenario} onCreateEntry={handleCreation} />
