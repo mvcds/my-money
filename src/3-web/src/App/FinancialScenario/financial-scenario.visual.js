@@ -1,10 +1,17 @@
 import React from 'react';
 
 import FixedValues from './fixed-values'
+import CreateEntryDialog from './create-entry-dialog'
 
 import './financial-scenario.css';
 
-function FinancialScenario({ scenario, onCreateEntry }) {
+function FinancialScenario({
+  scenario,
+  isCreatingEntry,
+  onOpenCreateEntryDialog,
+  onCloseCreateEntryDialog,
+  onCreateEntry
+}) {
   if (!scenario) {
     return <Loading />
   }
@@ -12,9 +19,10 @@ function FinancialScenario({ scenario, onCreateEntry }) {
   return (
     <React.Fragment>
       <FixedValues scenario={scenario} />
-      <button className="financial__create-button" onClick={onCreateEntry}>
-        Create Random Entry
+      <button className="financial__create-button" onClick={onOpenCreateEntryDialog}>
+        Create Entry
       </button>
+      {isCreatingEntry && <CreateEntryDialog onClose={onCloseCreateEntryDialog} onCreateEntry={onCreateEntry} />}
     </React.Fragment>
   )
 }

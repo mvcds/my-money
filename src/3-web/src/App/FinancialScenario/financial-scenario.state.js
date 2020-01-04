@@ -6,6 +6,8 @@ import Component from  './financial-scenario.visual'
 function FinancialScenarioState({ projection , onCreateEntry, onReadScenario }) {
   const [scenario, setScenario] = useState(null);
 
+  const [isCreatingEntry, setCreatingEntry] = useState(false);
+
   useEffect(() => {
     if (!projection) return
 
@@ -40,7 +42,15 @@ function FinancialScenarioState({ projection , onCreateEntry, onReadScenario }) 
     trial()
   }
 
-  return <Component scenario={scenario} onCreateEntry={handleCreation} />
+  return (
+    <Component
+      scenario={scenario}
+      isCreatingEntry={isCreatingEntry}
+      onOpenCreateEntryDialog={() => setCreatingEntry(true)}
+      onCloseCreateEntryDialog={() => setCreatingEntry(false)}
+      onCreateEntry={handleCreation}
+    />
+  )
 }
 
 export default FinancialScenarioState
