@@ -1,19 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import { NotificationManager } from 'react-notifications';
 
 import Component from  './app.visual'
 
 function AppState({ app }) {
   const [isLoading, setLoading] = useState(true);
+  const [hasLoadingError, setLoadingError] = useState(false);
 
   useEffect(() => {
     init(app, () => {
       setLoading(false)
-    }, () => {
-      //TODO: make user aware, so they can retry to reload
+    }, (e) => {
+      NotificationManager.error('Try again later', 'Initializing app failed', 5000);
+      console.log(e)
+      setLoadingError(true)
+      setLoading(false)
     })
   }, [app]);
 
-  return <Component isLoading={isLoading} onCreateEntry={app.createEntry} onReadScenario={app.readScenario} />
+  return (
+    <Component
+      isLoading={isLoading}
+      hasLoadingError={hasLoadingError}
+      onCreateEntry={app.createEntry}
+      onReadScenario={app.readScenario}
+    />
+  )
 }
 
 async function init(app, onSuccess, onFailure) {
@@ -21,8 +33,7 @@ async function init(app, onSuccess, onFailure) {
     await app.storage.init()
     onSuccess()
   } catch(e) {
-    console.log(e)
-    onFailure()
+    onFailure(e)
   }
 }
 
