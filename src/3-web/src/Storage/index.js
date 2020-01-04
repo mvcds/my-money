@@ -33,12 +33,22 @@ const projection = {
   async read ({ id }) {
     const all = await this.readAll()
 
-    return all[id]
+    const data = all[id]
+
+    if (!data) return
+
+    return Object.assign({}, data)
   },
-  async update (data) {
+  async update ({ id, incoming, expenses }) {
+    const data = await this.read({ id })
+
+    if (!data) return
+
+    data.entries = [...incoming, ...expenses].map(entry => entry.id)
+
     const all = await this.readAll()
 
-    if (!all[data.id]) return
+    all[id] = data
 
     localStorage.setItem('my-money/projections', JSON.stringify(all))
   },
