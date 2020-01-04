@@ -12,13 +12,13 @@ const entry = {
   async create (data) {
     const entry = { ...data, id: app.nextEntryId() }
 
-    const list = await this.readAll()
+    const all = await this.readAll()
 
-    if (list[entry.id]) return this.create(data)
+    if (all[entry.id]) return this.create(data)
 
-    list[entry.id] = entry
+    all[entry.id] = entry
 
-    localStorage.setItem('my-money/entries', JSON.stringify(list))
+    localStorage.setItem('my-money/entries', JSON.stringify(all))
 
     return entry
   },
