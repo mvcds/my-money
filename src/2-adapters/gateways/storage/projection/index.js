@@ -38,6 +38,13 @@ function ProjectionStorage (oldProjections = {}, injection) {
       await driver.update(target)
 
       projections[target.id] = target
+    },
+    async createProjection (data) {
+      const projection = await driver.create(data)
+
+      projections[projection.id] = projection
+
+      return projection
     }
   })
 }

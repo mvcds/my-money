@@ -31,10 +31,14 @@ function Failure() {
   )
 }
 
-function Pages({ onCreateEntry, onReadScenario }) {
+function Pages({ projection, onCreateEntry, onReadScenario }) {
   return (
     <React.Fragment>
-      <FinancialScenario onCreateEntry={onCreateEntry} onReadScenario={onReadScenario} />
+      <FinancialScenario
+        projection={projection}
+        onCreateEntry={onCreateEntry}
+        onReadScenario={onReadScenario}
+      />
     </React.Fragment>
   )
 }

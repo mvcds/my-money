@@ -3,19 +3,20 @@ import { NotificationManager } from 'react-notifications';
 
 import Component from  './financial-scenario.visual'
 
-function FinancialScenarioState({ onCreateEntry, onReadScenario }) {
-  const [projectionId] = useState('default');
+function FinancialScenarioState({ projection , onCreateEntry, onReadScenario }) {
   const [scenario, setScenario] = useState(null);
 
   useEffect(() => {
+    if (!projection) return
+
     onReadScenario({
       onStart: Function.prototype,
       onError: (e) => console.log('scenario', e),
       onEnd: Function.prototype,
       onSuccess: setScenario,
-      projectionId
+      projectionId: projection.id
     })
-  }, [onReadScenario, projectionId]);
+  }, [onReadScenario, projection]);
 
   const handleCreation = async () => {
     const value = parseFloat((Math.random() * 10).toFixed(2))
@@ -28,7 +29,7 @@ function FinancialScenarioState({ onCreateEntry, onReadScenario }) {
           console.log(e)
         },
         onEnd: Function.prototype,
-        projectionId,
+        projectionId: projection.id,
         entry: {
           source: 'fake',
           value
