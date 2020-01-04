@@ -7,7 +7,7 @@ class CreateEntry {
   constructor (storage, injection) {
     this.execute = this.execute.bind({
       storage,
-      injection: { ...DEPENDENCIES, ...injection }
+      dependencies: { ...DEPENDENCIES, ...injection }
     })
   }
 
@@ -26,19 +26,34 @@ class CreateEntry {
 }
 
 async function create ({ projectionId, entry: data }) {
-  const { Entry, Projection } = this.injection
-
-  const idlessEntryEntity = new Entry(data)
-
-  const [jsonOfProjection, entryEntityWithId] = await Promise.all([
-    this.storage.readProjectionById(projectionId),
-    this.storage.createEntry(idlessEntryEntity)
+  const [projection, entry] = await Promise.all([
+    readProjection.call(this, projectionId),
+    createEntry.call(this, data)
   ])
 
-  const projection = new Projection(jsonOfProjection)
-
-  projection.addEntry(entryEntityWithId)
+  projection.addEntry(entry)
 
   await this.storage.updateProjection(projection)
 }
+
+async function readProjection (projectionId) {
+  const { Projection } = this.dependencies
+
+  const data = await this.storage.readProjectionById(projectionId)
+
+  const projection = new Projection(data)
+
+  return projection
+}
+
+async function createEntry (data) {
+  const { Entry } = this.dependencies
+
+  const idlessEntity = new Entry(data)
+
+  const entry = await this.storage.createEntry(idlessEntity)
+
+  return entry
+}
+
 module.exports = CreateEntry
