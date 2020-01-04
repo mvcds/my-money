@@ -9,8 +9,8 @@ describe('Create Entry Controller', function () {
     let uc
     before(async function () {
       const presenter = {
-        value: random.uuid,
-        source: random.uuid
+        value: random.uuid(),
+        source: random.uuid()
       }
 
       uc = {
