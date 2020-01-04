@@ -1,6 +1,7 @@
 const DEPENDENCIES = {
   Entry: require('my-domain/entities/entry'),
-  Projection: require('my-domain/entities/projection')
+  Projection: require('my-domain/entities/projection'),
+  Scenario: require('my-domain/objects/scenario')
 }
 
 class CreateEntry {
@@ -16,7 +17,7 @@ class CreateEntry {
 
     try {
       // mimic private method
-      await create.call(this, presenter)
+      await read.call(this, presenter)
     } catch (e) {
       presenter.onError(e)
     }
@@ -25,15 +26,14 @@ class CreateEntry {
   }
 }
 
-async function create ({ projectionId, entry: data }) {
-  const [projection, entry] = await Promise.all([
-    readProjection.call(this, projectionId),
-    createEntry.call(this, data)
-  ])
+async function read (presenter) {
+  const { Scenario } = this.dependencies
 
-  projection.addEntry(entry)
+  const projection = await readProjection.call(this, presenter.projectionId)
 
-  await this.storage.updateProjection(projection)
+  const scenario = new Scenario({ projection })
+
+  presenter.onSuccess(scenario)
 }
 
 async function readProjection (projectionId) {
@@ -44,16 +44,6 @@ async function readProjection (projectionId) {
   const projection = new Projection({ ...data, entries: entries.map(e => new Entry(e)) })
 
   return projection
-}
-
-async function createEntry (data) {
-  const { Entry } = this.dependencies
-
-  const idlessEntity = new Entry(data)
-
-  const entry = await this.storage.createEntry(idlessEntity)
-
-  return entry
 }
 
 module.exports = CreateEntry

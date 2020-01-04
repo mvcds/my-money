@@ -6,6 +6,7 @@ const EntryFactory = require('my-domain/entities/entry/entry.factory')
 
 const CreateEntry = require('./index')
 
+// TODO: move this Given to a common place
 Given('the world\'s {string}', function (key) {
   this.world = Object.assign({}, this.world, { [key]: {} })
 })
@@ -22,6 +23,7 @@ Given('the entry a value of {int}', function (value) {
   setValue(this.world, key, value)
 })
 
+// TODO: move this function to a common place
 function setValue (object, [key, nextKey, ...rest], value) {
   if (rest.length > 0) {
     return setValue(object[key], [nextKey, ...rest], value)
@@ -47,6 +49,7 @@ Given('no errors when trying to create the entry', function () {
 
   const projection = {
     id: random.uuid(),
+    entries: [],
     addEntry: sinon.mock('projection.addEntry').once().withExactArgs(entry)
   }
 
@@ -74,7 +77,6 @@ Given('no errors when trying to create the entry', function () {
     .returns(entry)
   injection.Projection = sinon.mock('Projection')
     .once()
-    .withExactArgs(projection)
     .returns(projection)
 })
 
@@ -108,6 +110,7 @@ Then('creating a new entry succeeds', function () {
   })
 })
 
+// TODO: move this function to a common place
 Then('the world\'s {string} is verified', function (key) {
   verify(this.world, key.split('.'))
 })

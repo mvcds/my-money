@@ -21,6 +21,7 @@ Something I was writing about on [Code Thoughts][2]
 1. The adapter layer was overly complicated, then it was simplified
 1. It's possible to see that the data is stored correctly on localStorage` (dev tool's application tab)
 1. Some corrections/simplifications were necessary. This is now the base code for future development.
+1. Reading information was necessary. This capability was expected and it was expected to touch all layers BUT domain. Everything happened as planned =D
 
 ## OBS
 
@@ -28,6 +29,7 @@ Something I was writing about on [Code Thoughts][2]
   * The web layer created with `yarn create react-app my-app --template cypress` run on `src` because I was lazy about configuring a react app
 * When changing things on dependencies, the layer above does not works
 * After creating a new layer, I removed all `node_modules` folders and `yarn.lock` files  (root and workspaces), and rerun `yarn` on the root project - but just because I'm paranoid, you don't need to do it as [things will work ~almost~ all the time][1]
+* For this example app, user cannot read projections directly, so there's no use case for it. If more features need this capability while users don't, the way to go is to create a use case for it BUT not an adapter.
 
 ## Known issues
 

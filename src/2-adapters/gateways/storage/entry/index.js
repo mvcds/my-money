@@ -9,6 +9,17 @@ function EntryStorage (oldEntries = {}, injection) {
   })
 
   return Object.assign(this, {
+    async readEntryById (id) {
+      if (!id) {
+        throw new Error('Missing ID when reading by ID')
+      }
+
+      const entry = await driver.read({ id })
+
+      entries[id] = entry
+
+      return entry
+    },
     async createEntry (data) {
       const entry = await driver.create(data)
 

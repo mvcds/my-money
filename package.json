@@ -29,7 +29,7 @@
     "**/1-use-cases/*.js": ["yarn test:uc"],
     "**/2-adapters/*.js": ["yarn test:adapters"],
     "**/3-web/*.js": ["yarn test:web"],
-    "**/*.feature": ["yarn test"]
+    "**/*.feature": ["yarn test:uc"]
   },
   "devDependencies": {
     "eslint": "^6.8.0",

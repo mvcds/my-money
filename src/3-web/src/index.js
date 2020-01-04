@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import CreateEntry from 'my-adapters/controllers/entry/create'
+import ReadScenario from 'my-adapters/controllers/scenario/read'
 
 import storage from './Storage'
 
@@ -14,20 +15,9 @@ const app = {
     onError: (msg) => console.log('error', msg)
   },
 }
-const fakeScenario = {
-  incoming: {
-    entries: [],
-    total: 0
-  },
-  expenses: {
-    entries: [],
-    total: 0
-  },
-  difference: 0
-}
 
 app.createEntry = new CreateEntry(app).create
-app.readScenario = () => Promise.resolve(fakeScenario)
+app.readScenario = new ReadScenario(app).read
 
 ReactDOM.render(<App app={app} />, document.getElementById('root'));
 

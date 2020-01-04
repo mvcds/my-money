@@ -9,6 +9,15 @@ const app = {
 }
 
 const entry = {
+  async read ({ id }) {
+    const all = await this.readAll()
+
+    const data = all[id]
+
+    if (!data) return
+
+    return Object.assign({}, data)
+  },
   async create (data) {
     const entry = { ...data, id: app.nextEntryId() }
 

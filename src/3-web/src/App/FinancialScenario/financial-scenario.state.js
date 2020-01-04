@@ -7,9 +7,13 @@ function FinancialScenarioState({ onCreateEntry, onReadScenario }) {
   const [scenario, setScenario] = useState(null);
 
   useEffect(() => {
-    onReadScenario(projectionId)
-      .then(setScenario)
-      .catch(x => console.log(x))
+    onReadScenario({
+      onStart: () => console.log('scenario?'),
+      onError: (e) => console.log('scenario', e),
+      onEnd: () => console.log('scenario!'),
+      onSuccess: setScenario,
+      projectionId
+    })
   }, [onReadScenario, projectionId]);
 
   const handleCreation = async () => {
@@ -17,7 +21,7 @@ function FinancialScenarioState({ onCreateEntry, onReadScenario }) {
 
     await onCreateEntry({
       onStart: () => console.log('creating...'),
-      onError: (e) => console.log(e),
+      onError: (e) => console.log('creating', e),
       onEnd: () => console.log('created!'),
       projectionId,
       entry: {

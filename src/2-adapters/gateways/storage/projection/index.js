@@ -16,6 +16,10 @@ function ProjectionStorage (oldProjections = {}, injection) {
 
       const projection = await driver.read({ id })
 
+      if (projection) {
+        projection.entries = await Promise.all(projection.entries.map(this.readEntryById))
+      }
+
       projections[id] = projection
 
       return projection

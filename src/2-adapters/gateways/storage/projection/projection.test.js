@@ -14,24 +14,29 @@ describe('Projection Storage', function () {
       })
     })
 
-    describe('Some id', function () {
-      let id
+    describe('Existing projection', function () {
+      let data
       let projection
       let storage
       let result
       before(async function () {
-        id = random.uuid()
+        data = {
+          id: random.uuid(),
+          entries: [random.uuid()]
+        }
 
         projection = {
           read: sinon.mock()
             .once()
-            .withExactArgs({ id })
-            .resolves(id)
+            .withExactArgs({ id: data.id })
+            .resolves(data)
         }
 
         storage = new Storage({}, { projection })
 
-        result = await storage.readProjectionById(id)
+        storage.readEntryById = sinon.mock('readEntryById').once().withArgs(data.entries[0]).resolves()
+
+        result = await storage.readProjectionById(data.id)
       })
 
       it('Reads by id', function () {
@@ -39,11 +44,15 @@ describe('Projection Storage', function () {
       })
 
       it('Updates the storage', function () {
-        assert.deepEqual(storage.projections, [id])
+        assert.deepEqual(storage.projections, [data])
       })
 
       it('Returns what is read', function () {
-        assert.equal(result, id)
+        assert.equal(result, data)
+      })
+
+      it('Enhances the entries', function () {
+        storage.readEntryById.verify()
       })
     })
   })
