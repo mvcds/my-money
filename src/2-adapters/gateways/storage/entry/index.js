@@ -1,6 +1,6 @@
 function EntryStorage (oldEntries = {}, injection) {
   const entries = oldEntries
-  const { drive: entryDrive } = { ...injection }
+  const { entry: driver } = { ...injection }
 
   Object.defineProperty(this, 'entries', {
     get () {
@@ -10,7 +10,7 @@ function EntryStorage (oldEntries = {}, injection) {
 
   return Object.assign(this, {
     async createEntry (data) {
-      const entry = await entryDrive.create(data)
+      const entry = await driver.create(data)
 
       entries[entry.id] = entry
 

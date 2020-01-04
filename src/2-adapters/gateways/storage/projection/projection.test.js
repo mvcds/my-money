@@ -16,26 +16,26 @@ describe('Projection Storage', function () {
 
     describe('Some id', function () {
       let id
-      let drive
+      let projection
       let storage
       let result
       before(async function () {
         id = random.uuid()
 
-        drive = {
+        projection = {
           read: sinon.mock()
             .once()
             .withExactArgs({ id })
             .resolves(id)
         }
 
-        storage = new Storage({}, { drive })
+        storage = new Storage({}, { projection })
 
         result = await storage.readProjectionById(id)
       })
 
       it('Reads by id', function () {
-        drive.read.verify()
+        projection.read.verify()
       })
 
       it('Updates the storage', function () {
@@ -66,7 +66,7 @@ describe('Projection Storage', function () {
     })
 
     describe('Projection exists', function () {
-      let drive
+      let projection
       let storage
       let newProjection
       before(async function () {
@@ -82,19 +82,19 @@ describe('Projection Storage', function () {
           value: 'new'
         }
 
-        drive = {
+        projection = {
           update: sinon.mock()
             .once()
             .withExactArgs(newProjection)
         }
 
-        storage = new Storage({ [id]: oldProjection }, { drive })
+        storage = new Storage({ [id]: oldProjection }, { projection })
 
         await storage.updateProjection(newProjection)
       })
 
       it('Updates the projection', function () {
-        drive.update.verify()
+        projection.update.verify()
       })
 
       it('Updates the storage', function () {

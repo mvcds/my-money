@@ -6,12 +6,12 @@ const DEPENDENCIES = {
   }
 }
 
-function Storage (containerForDrives, injection) {
+function Storage (containerForDrivers, injection) {
   const { storages } = { ...DEPENDENCIES, ...injection }
 
   return {
     async init () {
-      const substorages = await initSubstorages(containerForDrives, storages)
+      const substorages = await initSubstorages(containerForDrivers, storages)
 
       substorages.forEach(linkWithSubstorage, this)
     }
@@ -28,7 +28,7 @@ function initSubstorages (container, storages) {
 
     const oldValues = await drive.readAll()
 
-    return new Substorage(oldValues, { drive })
+    return new Substorage(oldValues, container)
   })
 
   return Promise.all(substorages)
