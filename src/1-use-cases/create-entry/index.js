@@ -28,16 +28,16 @@ class CreateEntry {
 async function create ({ projectionId, entry: data }) {
   const { Entry, Projection } = this.injection
 
-  const newEntry = new Entry(data)
+  const idlessEntryEntity = new Entry(data)
 
-  const [projectionData, entry] = await Promise.all([
+  const [jsonOfProjection, entryEntityWithId] = await Promise.all([
     this.storage.readProjectionById(projectionId),
-    this.storage.createEntry(newEntry)
+    this.storage.createEntry(idlessEntryEntity)
   ])
 
-  const projection = new Projection(projectionData)
+  const projection = new Projection(jsonOfProjection)
 
-  projection.addEntry(entry)
+  projection.addEntry(entryEntityWithId)
 
   await this.storage.updateProjection(projection)
 }
