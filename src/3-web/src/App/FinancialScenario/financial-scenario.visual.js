@@ -1,7 +1,7 @@
 import React from 'react';
 
 import FixedValues from './fixed-values'
-import CreateEntryDialog from './create-entry-dialog'
+import CreateEntryDialog from './CreateEntryDialog'
 
 import './financial-scenario.css';
 

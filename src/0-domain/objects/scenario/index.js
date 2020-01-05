@@ -13,7 +13,7 @@ function Scenario ({ projection }) {
 
   Object.defineProperty(this, 'difference', {
     get () {
-      return this.incoming.total - this.expenses.total
+      return this.incoming.total + this.expenses.total
     }
   })
 

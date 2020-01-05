@@ -20,9 +20,7 @@ function FinancialScenarioState({ projection , onCreateEntry, onReadScenario }) 
     })
   }, [onReadScenario, projection]);
 
-  const handleCreation = async () => {
-    const value = parseFloat((Math.random() * 10).toFixed(2))
-
+  const handleCreation = async (entry) => {
     const trial = async () => {
       await onCreateEntry({
         onStart: Function.prototype,
@@ -32,14 +30,11 @@ function FinancialScenarioState({ projection , onCreateEntry, onReadScenario }) 
         },
         onEnd: Function.prototype,
         projectionId: projection.id,
-        entry: {
-          source: 'fake',
-          value
-        }
+        entry
       })
     }
 
-    trial()
+    await trial()
   }
 
   return (

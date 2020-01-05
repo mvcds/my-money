@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -7,8 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-function CreateEntryDialog({ isOpen, source, value, onClose, onCreateEntry }) {
-  const example = `MY$ ${parseFloat((Math.random() * 100).toFixed(2))}`
+function CreateEntryDialog({ isInvalid, source, value, onChangeSource, onChangeValue, onClose, onCreate }) {
+  // only a visual concern, kept as state to avoid changes on every rerender
+  const [example] = useState(`MY$ ${parseFloat((Math.random() * 100).toFixed(2))}`)
 
   return (
     <Dialog open onClose={onClose} aria-labelledby="form-dialog-title">
@@ -25,7 +26,10 @@ function CreateEntryDialog({ isOpen, source, value, onClose, onCreateEntry }) {
           type="input"
           fullWidth
           placeholder="salary, rent, etc"
-          value={source}
+          value={source.input}
+          onChange={onChangeSource}
+          error={!!source.error}
+          helperText={source.error}
         />
         <TextField
           margin="dense"
@@ -34,16 +38,18 @@ function CreateEntryDialog({ isOpen, source, value, onClose, onCreateEntry }) {
           type="number"
           fullWidth
           placeholder={example}
-          helperText="Always use the same currency"
-          value={value}
+          value={value.input}
+          onChange={onChangeValue}
+          error={!!value.error}
+          helperText={value.error || 'Always use the same currency and up to two decimal places'}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">
-          Cancel
-        </Button>
-        <Button onClick={onCreateEntry} color="primary" disabled>
+        <Button onClick={onCreate} color="primary" disabled={isInvalid}>
           Create
+        </Button>
+        <Button onClick={onClose} color="primary">
+          Close
         </Button>
       </DialogActions>
     </Dialog>

@@ -16,7 +16,7 @@ describe('Scenario Object', function () {
           EntryFactory.withValue(5).build()
         ],
         expenses: [
-          EntryFactory.withValue(4).build()
+          EntryFactory.withValue(-4).build()
         ]
       }
     })
@@ -40,14 +40,14 @@ describe('Scenario Object', function () {
 
   describe('#expenses', function () {
     it('Calculates the total', function () {
-      assert.equal(scenario.expenses.total, 4)
+      assert.equal(scenario.expenses.total, -4)
     })
 
     it('Enhances the entries', function () {
       const entries = scenario.expenses.entries.reduce((array, { value, share }) => [...array, { value, share }], [])
 
       assert.deepEqual(entries, [
-        { value: 4, share: 1 }
+        { value: -4, share: 1 }
       ])
     })
   })
