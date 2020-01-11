@@ -1,3 +1,3 @@
-import Component from  './app.state'
+import Component from  './app.data'
 
 export default Component
