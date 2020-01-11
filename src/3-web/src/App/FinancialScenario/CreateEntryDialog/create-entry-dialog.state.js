@@ -54,7 +54,7 @@ function CreateEntryDialog({ onClose, onCreateEntry }) {
     });
   })
 
-  const isInvalid = getSourceError(source.input) || getValueError(value.input)
+  const isInvalid = !!(getSourceError(source.input) || getValueError(value.input))
 
   const handleCreation = async () => {
     const entry = { source: source.input, value: value.input }
