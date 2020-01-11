@@ -22,11 +22,14 @@ class ViewModel {
     this.onLoadFailure = onLoadFailure.bind(this)
   }
 
+  get isEmpty() {
+    return !this.storage.projections.length
+  }
+
   async init() {
     await this.storage.init()
 
-    //  TODO: if (this.isEmpty) {
-    if (!this.storage.projections.length) {
+    if (this.isEmpty) {
       await this.createProjection({
         projection: {
           title: 'Standard',
