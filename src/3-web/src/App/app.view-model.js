@@ -19,7 +19,9 @@ class ViewModel {
   }
 
   get isEmpty() {
-    return !this.storage.projections.length
+    const { projections = [] } = this.storage
+
+    return !projections.length
   }
 
   async init() {
