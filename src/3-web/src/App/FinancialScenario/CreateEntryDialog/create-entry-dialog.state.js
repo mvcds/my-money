@@ -33,12 +33,15 @@ function CreateEntryDialog({ onClose, onCreateEntry }) {
   const [source, setSource] = useState(INPUT)
   const [value, setValue] = useState(INPUT)
 
-  const handleSource = (({ target: { value } }) => {
+  const handleSource = (({ target }) => {
+    const { value } = target
+
     const error = getSourceError(value)
 
     setSource({
       input: value,
-      error
+      error,
+      target
     });
   });
 
@@ -55,6 +58,8 @@ function CreateEntryDialog({ onClose, onCreateEntry }) {
 
   const handleCreation = async () => {
     const entry = { source: source.input, value: value.input }
+
+    source.target.focus()
 
     setSource(INPUT)
     setValue(INPUT)
