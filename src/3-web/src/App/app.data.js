@@ -9,8 +9,6 @@ import ViewModel from './app.view-model'
 const AppData = observer(({ app }) => {
   useEffect(() => {
     app.init()
-      .then(app.onLoadSuccess)
-      .catch(app.onLoadFailure)
   }, [app])
 
   return (

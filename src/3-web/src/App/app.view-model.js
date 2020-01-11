@@ -16,10 +16,6 @@ class ViewModel {
 
     this.createEntry = new CreateEntry(this).create
     this.readScenario = new ReadScenario(this).read
-    this.createProjection = new CreateProjection(this).create
-
-    this.onLoadSuccess = onLoadSuccess.bind(this)
-    this.onLoadFailure = onLoadFailure.bind(this)
   }
 
   get isEmpty() {
@@ -27,17 +23,16 @@ class ViewModel {
   }
 
   async init() {
-    await this.storage.init()
+    try {
+      await this.storage.init()
 
-    if (this.isEmpty) {
-      await this.createProjection({
-        projection: {
-          title: 'Standard',
-        },
-        onStart: Function.prototype,
-        onError: e => { throw e },
-        onEnd: Function.prototype,
-      })
+      if (this.isEmpty) {
+        await createFirstProjection.call(this)
+      }
+
+      onLoadSuccess.call(this)
+    } catch (error) {
+      onLoadFailure.call(this, error)
     }
   }
 }
@@ -47,6 +42,19 @@ decorate(ViewModel, {
   projection: observable,
   init: action
 })
+
+async function createFirstProjection() {
+  const create = new CreateProjection(this).create
+
+  await create({
+    projection: {
+      title: 'Standard',
+    },
+    onStart: Function.prototype,
+    onError: e => { throw e },
+    onEnd: Function.prototype,
+  })
+}
 
 function onLoadSuccess() {
   this.isLoading = false
