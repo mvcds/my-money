@@ -1,10 +1,10 @@
 import React, { useEffect } from "react"
 import { observer } from "mobx-react"
 
-import Storage from '../Storage'
+import Storage from 'my-web/src/Storage'
+import ViewModel from 'my-web/src/Models/app'
 
 import Component from './app.visual'
-import ViewModel from './app.view-model'
 
 const AppData = observer(({ app }) => {
   useEffect(() => {
