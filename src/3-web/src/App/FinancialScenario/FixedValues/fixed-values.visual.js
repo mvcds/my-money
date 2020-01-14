@@ -1,5 +1,9 @@
 import React from 'react';
 
+const formarter = Intl && Intl.NumberFormat ? new Intl.NumberFormat() : {
+  format: (x) => x.toLocaleString ? x.toLocaleString() : x.toFixed(2)
+}
+
 function FixedValues({ scenario }) {
   return (
     <table className="financial__values">
@@ -67,17 +71,17 @@ function Percentage({ value }) {
 
   return (
     <td>
-      {Number.isNaN(percentage) ? 0 : percentage} %
+      {Number.isNaN(percentage) ? 0 : formarter.format(percentage)} %
     </td>
   )
 }
 
 function Money({ value }) {
-  const money = value.toFixed(2)
+  const money = formarter.format(Math.abs(value))
 
   return (
     <td>
-      ${Number.isNaN(money) ? 0 : Math.abs(money)}
+      ${Number.isNaN(money) ? 0 : money}
     </td>
   )
 }
