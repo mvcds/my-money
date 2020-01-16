@@ -4,13 +4,13 @@ const DEPENDENCIES = {
 
 class CreateProjection {
   constructor (storage, injection) {
-    this.execute = this.execute.bind({
+    this.create = this.create.bind({
       storage,
       dependencies: { ...DEPENDENCIES, ...injection }
     })
   }
 
-  async execute (presenter) {
+  async create (presenter) {
     const { Projection } = this.dependencies
 
     presenter.onStart()

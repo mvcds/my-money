@@ -8,7 +8,7 @@ function CreateEntryController (app, injection) {
   const uc = new UseCase(app.storage)
 
   Object.assign(this, {
-    create: uc.execute
+    create: uc.create
   })
 }
 

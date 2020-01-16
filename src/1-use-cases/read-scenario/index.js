@@ -6,18 +6,18 @@ const DEPENDENCIES = {
 
 class CreateEntry {
   constructor (storage, injection) {
-    this.execute = this.execute.bind({
+    this.read = this.read.bind({
       storage,
       dependencies: { ...DEPENDENCIES, ...injection }
     })
   }
 
-  async execute (presenter) {
+  async read (presenter) {
     presenter.onStart()
 
     try {
       // mimic private method
-      await read.call(this, presenter)
+      await execute.call(this, presenter)
     } catch (e) {
       presenter.onError(e)
     }
@@ -26,7 +26,7 @@ class CreateEntry {
   }
 }
 
-async function read (presenter) {
+async function execute (presenter) {
   const { Scenario } = this.dependencies
 
   const projection = await readProjection.call(this, presenter.projectionId)

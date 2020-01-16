@@ -8,7 +8,7 @@ function ReadScenarioController (app, injection) {
   const uc = new UseCase(app.storage)
 
   Object.assign(this, {
-    read: uc.execute
+    read: uc.read
   })
 }
 

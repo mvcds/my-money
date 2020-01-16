@@ -53,5 +53,5 @@ When('I read the scenario', async function () {
 
   const uc = new ReadScenario(storage, injection)
 
-  await uc.execute(presenter)
+  await uc.read(presenter)
 })

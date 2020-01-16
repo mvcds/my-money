@@ -85,7 +85,7 @@ When('I create the entry', async function () {
 
   const uc = new CreateEntry(storage, injection)
 
-  await uc.execute(presenter)
+  await uc.create(presenter)
 })
 
 Then('creating a new entry fails', function () {

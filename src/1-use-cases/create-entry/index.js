@@ -5,18 +5,18 @@ const DEPENDENCIES = {
 
 class CreateEntry {
   constructor (storage, injection) {
-    this.execute = this.execute.bind({
+    this.create = this.create.bind({
       storage,
       dependencies: { ...DEPENDENCIES, ...injection }
     })
   }
 
-  async execute (presenter) {
+  async create (presenter) {
     presenter.onStart()
 
     try {
       // mimic private method
-      await create.call(this, presenter)
+      await execute.call(this, presenter)
     } catch (e) {
       presenter.onError(e)
     }
@@ -25,7 +25,7 @@ class CreateEntry {
   }
 }
 
-async function create ({ projectionId, entry: data }) {
+async function execute ({ projectionId, entry: data }) {
   const [projection, entry] = await Promise.all([
     readProjection.call(this, projectionId),
     createEntry.call(this, data)
