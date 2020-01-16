@@ -8,7 +8,17 @@ function ReadScenarioController (app, injection) {
   const uc = new UseCase(app.storage)
 
   Object.assign(this, {
-    read: uc.read
+    read: (presenter) => {
+      try {
+        if (!presenter.projectionId) {
+          throw new Error('Projection has not id to be identified')
+        }
+
+        return uc.read(presenter)
+      } catch (error) {
+        presenter.onError(error)
+      }
+    }
   })
 }
 

@@ -43,6 +43,10 @@ async function execute ({ projectionId, entry: data }) {
 }
 
 async function readProjection (projectionId) {
+  if (!projectionId) {
+    throw new Error('Cannot create an entry without projectionId')
+  }
+
   const { Projection, Entry } = this.dependencies
 
   const { entries, ...data } = await this.storage.readProjectionById(projectionId)
@@ -53,6 +57,10 @@ async function readProjection (projectionId) {
 }
 
 async function createEntry (data) {
+  if (!data) {
+    throw new Error('Cannot create an entry without its data')
+  }
+
   const { Entry } = this.dependencies
 
   const idlessEntity = new Entry(data)

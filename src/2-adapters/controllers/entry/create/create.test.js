@@ -9,8 +9,12 @@ describe('Create Entry Controller', function () {
     let uc
     before(async function () {
       const presenter = {
-        value: random.uuid(),
-        source: random.uuid()
+        projectionId: random.uuid(),
+        entry: {
+          value: random.uuid(),
+          source: random.uuid()
+        },
+        onError: Function.prototype
       }
 
       uc = {

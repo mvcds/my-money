@@ -36,6 +36,7 @@ Given('an error when trying to create the entry', function () {
   const error = new Error(random.uuid())
   const { presenter, storage } = this.world
 
+  presenter.projectionId = random.uuid()
   presenter.onStart = Function.prototype
   presenter.onError = sinon.mock('onError').once().withExactArgs(error)
   presenter.onEnd = Function.prototype

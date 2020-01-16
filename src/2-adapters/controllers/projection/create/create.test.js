@@ -9,7 +9,9 @@ describe('Create Projection Controller', function () {
     let uc
     before(async function () {
       const presenter = {
-        title: random.uuid()
+        projection: {
+          title: random.uuid()
+        }
       }
 
       uc = {
