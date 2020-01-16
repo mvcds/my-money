@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 
 const formarter = Intl && Intl.NumberFormat ? new Intl.NumberFormat() : {
   format: (x) => x.toLocaleString ? x.toLocaleString() : x.toFixed(2)
 }
 
-function FixedValues({ scenario }) {
+function FixedValues ({ scenario }) {
   return (
     <table className="financial__values">
       <thead>
@@ -41,7 +41,7 @@ function FixedValues({ scenario }) {
   )
 }
 
-function Group({ entries: { entries, total }, name }) {
+function Group ({ entries: { entries, total }, name }) {
   return (
     <React.Fragment>
       {entries.map(Entry)}
@@ -53,7 +53,7 @@ function Group({ entries: { entries, total }, name }) {
   )
 }
 
-function Entry({ id, source, value, isDisabled, share }) {
+function Entry ({ id, source, value, isDisabled, share }) {
   return (
     <tr key={id}>
       <td>{source}</td>
@@ -66,7 +66,7 @@ function Entry({ id, source, value, isDisabled, share }) {
   )
 }
 
-function Percentage({ value }) {
+function Percentage ({ value }) {
   const percentage = parseInt((value * 100).toFixed(2), 10)
 
   return (
@@ -76,7 +76,7 @@ function Percentage({ value }) {
   )
 }
 
-function Money({ value }) {
+function Money ({ value }) {
   const money = formarter.format(Math.abs(value))
 
   return (

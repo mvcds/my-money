@@ -1,5 +1,5 @@
-import React, { useEffect } from "react"
-import { observer } from "mobx-react"
+import React, { useEffect } from 'react'
+import { observer } from 'mobx-react'
 
 import Storage from 'my-web/src/Storage'
 import ViewModel from 'my-web/src/Models/app'

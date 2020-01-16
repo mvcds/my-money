@@ -1,3 +1,3 @@
-import Component from  './app.data'
+import Component from './app.data'
 
 export default Component

@@ -1,5 +1,5 @@
 {
-  "extends": "react-app",
+  "extends": ["react-app", "../../.eslintrc.yml"],
   "plugins": ["cypress"],
   "env": {
     "cypress/globals": true

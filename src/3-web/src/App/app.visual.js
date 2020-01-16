@@ -1,11 +1,11 @@
-import React from 'react';
-import { NotificationContainer } from 'react-notifications';
-import './app.css';
-import 'react-notifications/lib/notifications.css';
+import React from 'react'
+import { NotificationContainer } from 'react-notifications'
+import './app.css'
+import 'react-notifications/lib/notifications.css'
 
 import FinancialScenario from './FinancialScenario'
 
-function App({ isLoading, hasLoadingError, ...props }) {
+function App ({ isLoading, hasLoadingError, ...props }) {
   const Content = isLoading ? Loading : (hasLoadingError ? Failure : Pages)
 
   return (
@@ -15,14 +15,14 @@ function App({ isLoading, hasLoadingError, ...props }) {
         <Content {...props} />
       </main>
     </div>
-  );
+  )
 }
 
-function Loading() {
+function Loading () {
   return (<span>LOADING...</span>)
 }
 
-function Failure() {
+function Failure () {
   return (
     <p>
       The app is not working right now<br/>
@@ -31,7 +31,7 @@ function Failure() {
   )
 }
 
-function Pages({ projection, onCreateEntry, onReadScenario }) {
+function Pages ({ projection, onCreateEntry, onReadScenario }) {
   return (
     <React.Fragment>
       <FinancialScenario
@@ -43,4 +43,4 @@ function Pages({ projection, onCreateEntry, onReadScenario }) {
   )
 }
 
-export default App;
+export default App

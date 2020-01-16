@@ -1,5 +1,5 @@
 const app = {
-  nextEntryId() {
+  nextEntryId () {
     const next = JSON.parse(localStorage.getItem('my-money/app/nextEntryId') || 0) + 1
     localStorage.setItem('my-money/app/nextEntryId', next)
     return next

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import React, { useState } from 'react'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
 
-function CreateEntryDialog({ isInvalid, source, value, onChangeSource, onChangeValue, onClose, onCreate }) {
+function CreateEntryDialog ({ isInvalid, source, value, onChangeSource, onChangeValue, onClose, onCreate }) {
   // only a visual concern, kept as state to avoid changes on every rerender
   const [example] = useState(`MY$ ${parseFloat((Math.random() * 100).toFixed(2))}`)
 

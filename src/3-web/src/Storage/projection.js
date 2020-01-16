@@ -48,7 +48,7 @@ const projection = {
     localStorage.setItem('my-money/projections', JSON.stringify(all))
 
     return projection
-  },
+  }
 }
 
 export default projection

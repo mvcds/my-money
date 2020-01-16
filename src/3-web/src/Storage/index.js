@@ -1,4 +1,4 @@
-import Storage  from 'my-adapters/gateways/storage'
+import Storage from 'my-adapters/gateways/storage'
 
 import entry from './entry'
 import projection from './projection'

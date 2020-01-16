@@ -1,5 +1,5 @@
-import { decorate, observable, action } from "mobx"
-import { NotificationManager } from 'react-notifications';
+import { decorate, observable, action } from 'mobx'
+import { NotificationManager } from 'react-notifications'
 
 import CreateEntry from 'my-adapters/controllers/entry/create'
 import CreateProjection from 'my-adapters/controllers/projection/create'
@@ -10,7 +10,7 @@ class ViewModel {
   hasLoadingError: false
   projection: null
 
-  constructor(storage, notifier) {
+  constructor (storage, notifier) {
     this.storage = storage
     this.notifier = notifier
 
@@ -18,13 +18,13 @@ class ViewModel {
     this.readScenario = new ReadScenario(this).read
   }
 
-  get isEmpty() {
+  get isEmpty () {
     const { projections = [] } = this.storage
 
     return !projections.length
   }
 
-  async init() {
+  async init () {
     try {
       await this.storage.init()
 
@@ -45,27 +45,27 @@ decorate(ViewModel, {
   init: action
 })
 
-async function createFirstProjection() {
+async function createFirstProjection () {
   const create = new CreateProjection(this).create
 
   await create({
     projection: {
-      title: 'Standard',
+      title: 'Standard'
     },
     onStart: Function.prototype,
     onError: e => { throw e },
-    onEnd: Function.prototype,
+    onEnd: Function.prototype
   })
 }
 
-function onLoadSuccess() {
+function onLoadSuccess () {
   this.isLoading = false
   this.hasLoadingError = false
   this.projection = this.storage.projections[0]
 }
 
-function onLoadFailure(error) {
-  NotificationManager.error('Try again later', 'Initializing app failed', 5000);
+function onLoadFailure (error) {
+  NotificationManager.error('Try again later', 'Initializing app failed', 5000)
   console.log(error)
 
   this.isLoading = false

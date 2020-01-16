@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 import FixedValues from './FixedValues'
 import CreateEntryDialog from './CreateEntryDialog'
 
-import './financial-scenario.css';
+import './financial-scenario.css'
 
-function FinancialScenario({
+function FinancialScenario ({
   scenario,
   isCreatingEntry,
   onOpenCreateEntryDialog,
@@ -27,9 +27,8 @@ function FinancialScenario({
   )
 }
 
-function Loading() {
+function Loading () {
   return (<span>LOADING...</span>)
 }
-
 
 export default FinancialScenario

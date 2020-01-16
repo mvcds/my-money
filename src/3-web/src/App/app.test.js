@@ -1,9 +1,11 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './app.visual';
+import React from 'react'
+import { render } from '@testing-library/react'
+import App from './app.visual'
 
-test.skip('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+describe('App component', function () {
+  it('renders learn react link', function () {
+    const { getByText } = render(<App />)
+    const linkElement = getByText(/learn react/i)
+    expect(linkElement).toBeInTheDocument()
+  })
+})

@@ -16,3 +16,4 @@ parserOptions:
 plugins:
   - mocha
 rules: {}
+root: true
