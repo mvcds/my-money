@@ -12,16 +12,20 @@ class CreateEntry {
   }
 
   async create (presenter) {
+    let result = { projection: null, entry: null }
+
     presenter.onStart()
 
     try {
       // mimic private method
-      await execute.call(this, presenter)
+      result = await execute.call(this, presenter)
     } catch (e) {
       presenter.onError(e)
     }
 
     presenter.onEnd()
+
+    return result
   }
 }
 
@@ -34,6 +38,8 @@ async function execute ({ projectionId, entry: data }) {
   projection.addEntry(entry)
 
   await this.storage.updateProjection(projection)
+
+  return { projection, entry }
 }
 
 async function readProjection (projectionId) {

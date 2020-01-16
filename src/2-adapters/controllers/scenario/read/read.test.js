@@ -13,7 +13,7 @@ describe('Read Scenario Controller', function () {
       }
 
       uc = {
-        execute: sinon.mock().once('uc').withExactArgs(presenter)
+        read: sinon.mock().once('uc').withExactArgs(presenter)
       }
 
       UseCase = sinon.mock('UseCase').withExactArgs(sinon.match.any).returns(uc)
@@ -28,7 +28,7 @@ describe('Read Scenario Controller', function () {
     })
 
     it('Executes the use case', function () {
-      uc.execute.verify()
+      uc.read.verify()
     })
   })
 })

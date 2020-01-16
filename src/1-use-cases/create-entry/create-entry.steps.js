@@ -1,3 +1,4 @@
+const assert = require('assert')
 const { Given, When, Then } = require('cucumber')
 const { random } = require('faker')
 const sinon = require('sinon')
@@ -78,6 +79,11 @@ Given('no errors when trying to create the entry', function () {
   injection.Projection = sinon.mock('Projection')
     .once()
     .returns(projection)
+
+  this.world.meta = {
+    projectionId: projection.id,
+    entryId: entry.id
+  }
 })
 
 When('I create the entry', async function () {
@@ -85,7 +91,7 @@ When('I create the entry', async function () {
 
   const uc = new CreateEntry(storage, injection)
 
-  await uc.create(presenter)
+  this.world.result = await uc.create(presenter)
 })
 
 Then('creating a new entry fails', function () {
@@ -113,6 +119,24 @@ Then('creating a new entry succeeds', function () {
 // TODO: move this function to a common place
 Then('the world\'s {string} is verified', function (key) {
   verify(this.world, key.split('.'))
+})
+
+Then('the updated projection is undefined', function () {
+  assert.equal(this.world.result.projection, null)
+})
+
+Then('the new entry is undefined', function () {
+  assert.equal(this.world.result.entry, null)
+})
+
+Then('the updated projection is defined', function () {
+  assert.notEqual(this.world.result.projection, null)
+  assert.equal(this.world.result.projection.id, this.world.meta.projectionId)
+})
+
+Then('the new entry is defined', function () {
+  assert.notEqual(this.world.result.entry, null)
+  assert.equal(this.world.result.entry.id, this.world.meta.entryId)
 })
 
 function verify (object, [key, nextKey, ...rest], value) {

@@ -13,16 +13,20 @@ class CreateEntry {
   }
 
   async read (presenter) {
+    const result = { scenario: null }
+
     presenter.onStart()
 
     try {
       // mimic private method
-      await execute.call(this, presenter)
+      result.scenario = await execute.call(this, presenter)
     } catch (e) {
       presenter.onError(e)
     }
 
     presenter.onEnd()
+
+    return result
   }
 }
 
@@ -34,6 +38,8 @@ async function execute (presenter) {
   const scenario = new Scenario({ projection })
 
   presenter.onSuccess(scenario)
+
+  return scenario
 }
 
 async function readProjection (projectionId) {

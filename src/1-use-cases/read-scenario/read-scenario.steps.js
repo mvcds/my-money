@@ -1,4 +1,5 @@
-const { Given, When } = require('cucumber')
+const assert = require('assert')
+const { Given, When, Then } = require('cucumber')
 const { random } = require('faker')
 const sinon = require('sinon')
 
@@ -53,5 +54,9 @@ When('I read the scenario', async function () {
 
   const uc = new ReadScenario(storage, injection)
 
-  await uc.read(presenter)
+  this.world.result = await uc.read(presenter)
+})
+
+Then('the scenario is defined', function () {
+  assert.notEqual(this.world.result.scenario, null)
 })

@@ -14,3 +14,4 @@ Feature: Read Scenario
     When I read the scenario
     Then the world's "presenter.onSuccess" is verified
      And the world's "presenter.onError" is verified
+     And the scenario is defined

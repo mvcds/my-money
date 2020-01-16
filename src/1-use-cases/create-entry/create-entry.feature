@@ -14,6 +14,8 @@ Feature: Create Entry
     When I create the entry
     Then creating a new entry fails
       And the world's "presenter.onError" is verified
+      And the updated projection is undefined
+      And the new entry is undefined
 
   Scenario Outline: Valid values
     Given the entry a value of <value>
@@ -21,6 +23,8 @@ Feature: Create Entry
     When I create the entry
     Then creating a new entry succeeds
       And the world's "presenter.onError" is verified
+      And the updated projection is defined
+      And the new entry is defined
 
     Examples:
       | value | direction |
