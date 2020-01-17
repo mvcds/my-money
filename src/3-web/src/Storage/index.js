@@ -1,11 +1,9 @@
-import Storage from 'my-adapters/gateways/storage'
+import Adapter from 'my-adapters/gateways/storage'
 
 import entry from './entry'
 import projection from './projection'
 
-const storage = new Storage({
+export default () => new Adapter({
   entry,
   projection
 })
-
-export default storage

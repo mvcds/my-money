@@ -22,7 +22,7 @@ const AppData = observer(({ app }) => {
   )
 })
 
-const viewModel = new ViewModel(Storage, {
+const viewModel = new ViewModel(Storage(), {
   onError: (msg) => console.log('error', msg)
 })
 
