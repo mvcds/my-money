@@ -4,14 +4,15 @@
   "main": "index.js",
   "author": "Marcos Vinícius C. da Silva <marvinc.silva@gmail.com>",
   "license": "MIT",
+  "homepage": "https://mvcds.github.io/my-money/",
   "private": true,
   "workspaces": [
     "src/*"
   ],
   "scripts": {
     "web": "cd src/3-web/ && yarn start",
-    "build": "yarn build:web",
-    "build:web": "rm -fr docs && cd src/3-web/ && yarn build && mv build ../../docs",
+    "deploy": "yarn deploy:web",
+    "deploy:web": "rm -fr docs && cd src/3-web/ && yarn build && mv build ../../docs && gh-pages -d ../../docs",
     "test": "yarn test:domain && yarn test:uc && yarn test:adapters && yarn test:web",
     "test:domain": "cd src/0-domain && yarn test",
     "test:uc": "cd src/1-use-cases && yarn test",
@@ -26,12 +27,24 @@
     }
   },
   "lint-staged": {
-    "**/*.js": ["yarn lint --fix"],
-    "**/0-domain/*.js": ["yarn test:domain"],
-    "**/1-use-cases/*.js": ["yarn test:uc"],
-    "**/2-adapters/*.js": ["yarn test:adapters"],
-    "**/3-web/*.js": ["yarn test:web"],
-    "**/*.feature": ["yarn test:uc"]
+    "**/*.js": [
+      "yarn lint --fix"
+    ],
+    "**/0-domain/*.js": [
+      "yarn test:domain"
+    ],
+    "**/1-use-cases/*.js": [
+      "yarn test:uc"
+    ],
+    "**/2-adapters/*.js": [
+      "yarn test:adapters"
+    ],
+    "**/3-web/*.js": [
+      "yarn test:web"
+    ],
+    "**/*.feature": [
+      "yarn test:uc"
+    ]
   },
   "devDependencies": {
     "eslint": "^6.8.0",
@@ -41,6 +54,7 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "gh-pages": "^2.2.0",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0"
   }
