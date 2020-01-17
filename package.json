@@ -10,7 +10,8 @@
     "src/*"
   ],
   "scripts": {
-    "web": "cd src/3-web/ && yarn start",
+    "start": "yarn start:web",
+    "start:web": "cd src/3-web/ && yarn start",
     "deploy": "yarn deploy:web",
     "deploy:web": "rm -fr docs && cd src/3-web/ && yarn build && mv build ../../docs && gh-pages -d ../../docs",
     "test": "yarn test:domain && yarn test:uc && yarn test:adapters && yarn test:web",
