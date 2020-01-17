@@ -1,21 +1,27 @@
 import { decorate, observable, action } from 'mobx'
+/* COLD BE IN BETTER PLACE??? */
 import { NotificationManager } from 'react-notifications'
-
+import Storage from 'my-web/src/Storage'
 import CreateEntry from 'my-adapters/controllers/entry/create'
 import CreateProjection from 'my-adapters/controllers/projection/create'
 import ReadScenario from 'my-adapters/controllers/scenario/read'
+/* COLD BE IN BETTER PLACE??? */
 
-class ViewModel {
-  isLoading: true
-  hasLoadingError: false
-  projection: null
+class Application {
+  isStarting: true;
+  hasStartingFailure: false;
+  projection: null;
 
-  constructor (storage, notifier) {
+  constructor (storage = Storage()) {
     this.storage = storage
-    this.notifier = notifier
+    this.notifier = this
 
+    this.start = this.start.bind(this)
+
+    /* wrong */
     this.createEntry = new CreateEntry(this).create
     this.readScenario = new ReadScenario(this).read
+    /* wrong */
   }
 
   get isEmpty () {
@@ -24,7 +30,9 @@ class ViewModel {
     return !projections.length
   }
 
-  async init () {
+  async start () {
+    this.isStarting = true
+
     try {
       await this.storage.init()
 
@@ -32,17 +40,23 @@ class ViewModel {
         await createFirstProjection.call(this)
       }
 
-      onLoadSuccess.call(this)
+      onStartSucess.call(this)
     } catch (error) {
-      onLoadFailure.call(this, error)
+      onStartFailure.call(this, error)
     }
+
+    this.isStarting = false
+  }
+
+  onError (error) {
+    console.log('error', error)
   }
 }
-decorate(ViewModel, {
-  isLoading: observable,
-  hasLoadingError: observable,
+decorate(Application, {
+  isStarting: observable,
+  hasStartingFailure: observable,
   projection: observable,
-  init: action
+  start: action
 })
 
 async function createFirstProjection () {
@@ -58,18 +72,17 @@ async function createFirstProjection () {
   })
 }
 
-function onLoadSuccess () {
-  this.isLoading = false
-  this.hasLoadingError = false
+function onStartSucess () {
+  this.hasStartingFailure = false
   this.projection = this.storage.projections[0]
 }
 
-function onLoadFailure (error) {
-  NotificationManager.error('Try again later', 'Initializing app failed', 5000)
-  console.log(error)
+function onStartFailure (error) {
+  this.hasStartingFailure = true
 
-  this.isLoading = false
-  this.hasLoadingError = true
+  // NotificationManager should not be here
+  NotificationManager.error('Try again later', 'Initializing app failed', 5000)
+  this.onError(error)
 }
 
-export default ViewModel
+export default Application
