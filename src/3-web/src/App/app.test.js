@@ -3,9 +3,11 @@ import { render } from '@testing-library/react'
 import App from './app.visual'
 
 describe('App component', function () {
-  it('renders learn react link', function () {
-    const { getByText } = render(<App />)
-    const linkElement = getByText(/learn react/i)
-    expect(linkElement).toBeInTheDocument()
+  describe('Start', function () {
+    it('Shows a loading message', function () {
+      const { getByText } = render(<App />)
+      const linkElement = getByText(/loading/i)
+      expect(linkElement).toBeInTheDocument()
+    })
   })
 })
