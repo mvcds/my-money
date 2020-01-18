@@ -4,8 +4,16 @@ import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import Application from './Data/application'
+import Storage from './Data/Storage'
 
-const application = new Application()
+const application = new Application({
+  storage: Storage(),
+  notifier: {
+    onError (error) {
+      console.log('error', error)
+    }
+  }
+})
 
 application.start()
 

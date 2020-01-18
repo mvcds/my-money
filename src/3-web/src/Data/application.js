@@ -1,7 +1,7 @@
 import { decorate, observable, action } from 'mobx'
 /* COLD BE IN BETTER PLACE??? */
 import { NotificationManager } from 'react-notifications'
-import Storage from 'my-web/src/Storage'
+
 import CreateEntry from 'my-adapters/controllers/entry/create'
 import CreateProjection from 'my-adapters/controllers/projection/create'
 import ReadScenario from 'my-adapters/controllers/scenario/read'
@@ -12,9 +12,9 @@ class Application {
   hasStartingFailure: false;
   projection: null;
 
-  constructor (storage = Storage()) {
+  constructor ({ storage, notifier }) {
     this.storage = storage
-    this.notifier = this
+    this.notifier = notifier
 
     this.start = this.start.bind(this)
 
@@ -46,10 +46,6 @@ class Application {
     }
 
     this.isStarting = false
-  }
-
-  onError (error) {
-    console.log('error', error)
   }
 }
 decorate(Application, {
