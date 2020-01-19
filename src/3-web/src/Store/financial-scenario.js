@@ -26,7 +26,7 @@ class FinancialScenario {
     const { create } = new CreateEntry(this.app)
 
     const trial = async () => {
-      await create({
+      const { projection } = await create({
         onStart: Function.prototype,
         onError: (e) => {
           NotificationManager.error('Click here to retry', 'Creating entry failed', 5000, trial, true)
@@ -36,6 +36,8 @@ class FinancialScenario {
         projectionId: this.scenario.projectionId,
         entry
       })
+
+      this.scenario = this.scenario.clone({ projection })
     }
 
     await trial()

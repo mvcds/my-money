@@ -1,6 +1,11 @@
-function Scenario ({ projection }) {
+function Scenario (data) {
+  const { projection } = data
+
   Object.assign(this, {
-    projectionId: projection.id
+    projectionId: projection.id,
+    clone (raw) {
+      return new Scenario({ ...data, ...raw })
+    }
   })
 
   Object.defineProperty(this, 'incoming', {
