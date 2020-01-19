@@ -20,7 +20,11 @@ class Application {
     this.createEntry = new CreateEntry(this).create
     /* wrong */
 
-    this.modules = modules.map(M => new M(this))
+    this.modules = Object.entries(modules)
+      .reduce((map, [key, Module]) => ({
+        ...map,
+        [key]: new Module(this)
+      }), {})
   }
 
   async start () {
@@ -30,7 +34,8 @@ class Application {
     try {
       await this.storage.init()
 
-      const starts = this.modules.map((m) => m.start())
+      const starts = Object.values(this.modules)
+        .map((instance) => instance.start())
 
       await Promise.all(starts)
     } catch (error) {

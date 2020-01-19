@@ -10,13 +10,16 @@ const application = new Application({
       console.log('error', error)
     }
   },
-  modules: [FinancialScenario]
+  modules: {
+    financialScenario: FinancialScenario
+  }
 })
 
 application.start()
 
 const data = {
-  application
+  application,
+  financialScenario: application.modules.financialScenario
 }
 
 export default data
