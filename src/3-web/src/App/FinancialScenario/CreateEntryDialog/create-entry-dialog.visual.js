@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
-function CreateEntryDialog ({ isInvalid, source, value, onChangeSource, onChangeValue, onClose, onCreate }) {
+function CreateEntryDialog ({ isInvalid, source, value, onChangeSource, onChangeValue, onClose, onCreate, onKeyPress }) {
   // only a visual concern, kept as state to avoid changes on every rerender
   const [example] = useState(`MY$ ${parseFloat((Math.random() * 100).toFixed(2))}`)
 
@@ -30,6 +30,7 @@ function CreateEntryDialog ({ isInvalid, source, value, onChangeSource, onChange
           onChange={onChangeSource}
           error={!!source.error}
           helperText={source.error}
+          onKeyPress={onKeyPress}
         />
         <TextField
           margin="dense"
@@ -42,6 +43,7 @@ function CreateEntryDialog ({ isInvalid, source, value, onChangeSource, onChange
           onChange={onChangeValue}
           error={!!value.error}
           helperText={value.error || 'Always use the same currency and up to two decimal places'}
+          onKeyPress={onKeyPress}
         />
       </DialogContent>
       <DialogActions>

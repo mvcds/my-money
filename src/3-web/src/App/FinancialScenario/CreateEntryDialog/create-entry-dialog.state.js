@@ -57,6 +57,8 @@ function CreateEntryDialog ({ onClose, onCreateEntry }) {
   const isInvalid = !!(getSourceError(source.input) || getValueError(value.input))
 
   const handleCreation = async () => {
+    if (isInvalid) return
+
     const entry = { source: source.input, value: value.input }
 
     source.target.focus()
@@ -67,6 +69,12 @@ function CreateEntryDialog ({ onClose, onCreateEntry }) {
     await onCreateEntry(entry)
   }
 
+  const handleKeyPress = ({ key }) => {
+    if (key === 'Enter') {
+      handleCreation()
+    }
+  }
+
   return (
     <Component
       isInvalid={isInvalid}
@@ -74,6 +82,7 @@ function CreateEntryDialog ({ onClose, onCreateEntry }) {
       value={value}
       onChangeSource={handleSource}
       onChangeValue={handleValue}
+      onKeyPress={handleKeyPress}
       onClose={onClose}
       onCreate={handleCreation}
     />
