@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "96deaf3ba9e705a56996118959c96e2b",
+    "revision": "fe716db0d736815f81da7676b36d906c",
     "url": "/my-money/index.html"
   },
   {
-    "revision": "f7766e0d4f52ea3b177d",
+    "revision": "fa19422040637eb743ae",
     "url": "/my-money/static/css/2.319c4ca1.chunk.css"
   },
   {
-    "revision": "70042c89be659e261fe7",
+    "revision": "7a881d808f0bb65e7587",
     "url": "/my-money/static/css/main.f115a74d.chunk.css"
   },
   {
-    "revision": "f7766e0d4f52ea3b177d",
-    "url": "/my-money/static/js/2.8a589392.chunk.js"
+    "revision": "fa19422040637eb743ae",
+    "url": "/my-money/static/js/2.c69698fe.chunk.js"
   },
   {
     "revision": "be8bd1997bc94dd87491f1847893fbfa",
-    "url": "/my-money/static/js/2.8a589392.chunk.js.LICENSE"
+    "url": "/my-money/static/js/2.c69698fe.chunk.js.LICENSE"
   },
   {
-    "revision": "70042c89be659e261fe7",
-    "url": "/my-money/static/js/main.db62554b.chunk.js"
+    "revision": "7a881d808f0bb65e7587",
+    "url": "/my-money/static/js/main.f53d43f0.chunk.js"
   },
   {
     "revision": "38a430e0672f63a04d9b",
