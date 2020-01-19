@@ -2,6 +2,7 @@ import React from 'react'
 
 import Money from './money'
 import Percentage from './percentage'
+import Entry from './Entry'
 
 function FixedValues ({ scenario }) {
   return (
@@ -49,19 +50,6 @@ function Group ({ entries: { entries, total }, name }) {
         <Money value={Math.abs(total)} />
       </tr>
     </React.Fragment>
-  )
-}
-
-function Entry ({ id, source, value, isDisabled, share }) {
-  return (
-    <tr key={id}>
-      <td>{source}</td>
-      <Money value={Math.abs(value)} />
-      <Percentage value={share} />
-      <td>
-        <input type="checkbox" checked={isDisabled} disabled />
-      </td>
-    </tr>
   )
 }
 
