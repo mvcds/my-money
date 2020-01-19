@@ -1,8 +1,7 @@
 import React from 'react'
 
-const formarter = Intl && Intl.NumberFormat ? new Intl.NumberFormat() : {
-  format: (x) => x.toLocaleString ? x.toLocaleString() : x.toFixed(2)
-}
+import Money from './money'
+import Percentage from './percentage'
 
 function FixedValues ({ scenario }) {
   return (
@@ -63,45 +62,6 @@ function Entry ({ id, source, value, isDisabled, share }) {
         <input type="checkbox" checked={isDisabled} disabled />
       </td>
     </tr>
-  )
-}
-
-function Percentage ({ value }) {
-  if (Number.isNaN(value)) {
-    return <Percentage value={0} />
-  }
-
-  const classes = ['financial__percentage']
-  const percentage = parseInt((value * 100).toFixed(2), 10)
-
-  if (value < 0) {
-    classes.push('financial__percentage--negative')
-  }
-
-  return (
-    <td className={classes.join(' ')}>
-      {formarter.format(percentage)} %
-    </td>
-  )
-}
-
-function Money ({ value }) {
-  if (Number.isNaN(value)) {
-    return <Money value={0} />
-  }
-
-  const classes = ['financial__money']
-  const money = formarter.format(Math.abs(value))
-  const text = value >= 0 ? '$' : '($)'
-
-  if (value < 0) {
-    classes.push('financial__money--negative')
-  }
-
-  return (
-    <td className={classes.join(' ')}>
-      {text}{money}
-    </td>
   )
 }
 
