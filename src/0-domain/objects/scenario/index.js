@@ -1,4 +1,8 @@
 function Scenario ({ projection }) {
+  Object.assign(this, {
+    projectionId: projection.id
+  })
+
   Object.defineProperty(this, 'incoming', {
     get () {
       return read(projection.incoming)
@@ -17,7 +21,7 @@ function Scenario ({ projection }) {
     }
   })
 
-  return this
+  return Object.freeze(this)
 }
 
 function read (entries) {

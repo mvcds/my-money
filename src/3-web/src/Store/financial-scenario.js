@@ -1,11 +1,17 @@
+import { decorate, observable, action } from 'mobx'
+import { NotificationManager } from 'react-notifications'
+
 import CreateProjection from 'my-adapters/controllers/projection/create'
 import ReadScenario from 'my-adapters/controllers/scenario/read'
+import CreateEntry from 'my-adapters/controllers/entry/create'
 
 class FinancialScenario {
   scenario: null;
 
   constructor (app) {
     this.app = app
+
+    this.handleEntryCreation = this.handleEntryCreation.bind(this)
   }
 
   async start () {
@@ -15,9 +21,31 @@ class FinancialScenario {
   }
 
   async handleEntryCreation (entry) {
+    if (!this.scenario) return
 
+    const { create } = new CreateEntry(this.app)
+
+    const trial = async () => {
+      await create({
+        onStart: Function.prototype,
+        onError: (e) => {
+          NotificationManager.error('Click here to retry', 'Creating entry failed', 5000, trial, true)
+          console.log(e)
+        },
+        onEnd: Function.prototype,
+        projectionId: this.scenario.projectionId,
+        entry
+      })
+    }
+
+    await trial()
   }
 }
+decorate(FinancialScenario, {
+  scenario: observable,
+  start: action,
+  handleEntryCreation: action
+})
 
 async function readProjection () {
   const { projections = [] } = this.app.storage
@@ -48,7 +76,7 @@ async function readScenario (projection) {
 }
 
 async function createFirstProjection () {
-  const create = new CreateProjection(this.app).create
+  const { create } = new CreateProjection(this.app)
 
   return create({
     projection: {

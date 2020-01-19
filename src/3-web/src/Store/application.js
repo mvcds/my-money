@@ -1,10 +1,5 @@
 import { decorate, observable, action } from 'mobx'
-/* COLD BE IN BETTER PLACE??? */
 import { NotificationManager } from 'react-notifications'
-
-import CreateEntry from 'my-adapters/controllers/entry/create'
-
-/* COLD BE IN BETTER PLACE??? */
 
 class Application {
   isStarting: true;
@@ -15,10 +10,6 @@ class Application {
     this.notifier = notifier
 
     this.start = this.start.bind(this)
-
-    /* wrong */
-    this.createEntry = new CreateEntry(this).create
-    /* wrong */
 
     this.modules = Object.entries(modules)
       .reduce((map, [key, Module]) => ({

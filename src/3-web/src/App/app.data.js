@@ -7,8 +7,8 @@ import Component from './app.visual'
 const AppData = observer(({ app }) => {
   return (
     <Component
-      isLoading={app.isLoading}
-      hasLoadingError={app.hasLoadingError}
+      isLoading={app.isStarting}
+      hasLoadingError={app.hasStartingFailure}
     />
   )
 })

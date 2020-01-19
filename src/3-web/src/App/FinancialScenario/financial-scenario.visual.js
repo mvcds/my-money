@@ -7,7 +7,7 @@ import './financial-scenario.css'
 
 function FinancialScenario ({
   scenario,
-  isCreatingEntry,
+  isCreateEntryDialogOpen,
   onOpenCreateEntryDialog,
   onCloseCreateEntryDialog,
   onCreateEntry
@@ -22,7 +22,7 @@ function FinancialScenario ({
       <button className="financial__create-button" onClick={onOpenCreateEntryDialog}>
         Create Entry
       </button>
-      {isCreatingEntry && <CreateEntryDialog onClose={onCloseCreateEntryDialog} onCreateEntry={onCreateEntry} />}
+      {isCreateEntryDialogOpen && <CreateEntryDialog onClose={onCloseCreateEntryDialog} onCreateEntry={onCreateEntry} />}
     </React.Fragment>
   )
 }
