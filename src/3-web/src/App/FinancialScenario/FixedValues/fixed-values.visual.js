@@ -47,7 +47,7 @@ function Group ({ entries: { entries, total }, name }) {
       {entries.map(Entry)}
       <tr>
         <th colSpan="3">{name}</th>
-        <Money value={total} />
+        <Money value={Math.abs(total)} />
       </tr>
     </React.Fragment>
   )
@@ -57,7 +57,7 @@ function Entry ({ id, source, value, isDisabled, share }) {
   return (
     <tr key={id}>
       <td>{source}</td>
-      <Money value={value} />
+      <Money value={Math.abs(value)} />
       <Percentage value={share} />
       <td>
         <input type="checkbox" checked={isDisabled} disabled />
@@ -67,21 +67,40 @@ function Entry ({ id, source, value, isDisabled, share }) {
 }
 
 function Percentage ({ value }) {
+  if (Number.isNaN(value)) {
+    return <Percentage value={0} />
+  }
+
+  const classes = ['financial__percentage']
   const percentage = parseInt((value * 100).toFixed(2), 10)
 
+  if (value < 0) {
+    classes.push('financial__percentage--negative')
+  }
+
   return (
-    <td>
-      {Number.isNaN(percentage) ? 0 : formarter.format(percentage)} %
+    <td className={classes.join(' ')}>
+      {formarter.format(percentage)} %
     </td>
   )
 }
 
 function Money ({ value }) {
+  if (Number.isNaN(value)) {
+    return <Money value={0} />
+  }
+
+  const classes = ['financial__money']
   const money = formarter.format(Math.abs(value))
+  const text = value >= 0 ? '$' : '($)'
+
+  if (value < 0) {
+    classes.push('financial__money--negative')
+  }
 
   return (
-    <td>
-      ${Number.isNaN(money) ? 0 : money}
+    <td className={classes.join(' ')}>
+      {text}{money}
     </td>
   )
 }
