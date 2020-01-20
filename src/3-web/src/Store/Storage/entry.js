@@ -35,6 +35,22 @@ const entry = {
     const all = localStorage.getItem('my-money/entries') || '{}'
 
     return JSON.parse(all)
+  },
+
+  async update ({ id, ...payload }) {
+    const data = await this.read({ id })
+
+    if (!data) return
+
+    const all = await this.readAll()
+
+    const updated = { ...data, ...payload, id }
+
+    all[id] = updated
+
+    localStorage.setItem('my-money/entries', JSON.stringify(all))
+
+    return updated
   }
 }
 

@@ -44,7 +44,7 @@ function FixedValues ({ scenario }) {
 function Group ({ entries: { entries, total }, name }) {
   return (
     <React.Fragment>
-      {entries.map(Entry)}
+      {entries.map((entry) => <Entry key={entry.id} {...entry} />)}
       <tr>
         <th colSpan="3">{name}</th>
         <Money value={Math.abs(total)} />

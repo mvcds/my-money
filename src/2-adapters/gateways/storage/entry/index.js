@@ -26,6 +26,13 @@ function EntryStorage (oldEntries = {}, injection) {
       entries[entry.id] = entry
 
       return entry
+    },
+    async updateEntry (data) {
+      const entry = await driver.update(data)
+
+      entries[data.id] = entry
+
+      return entry
     }
   })
 }

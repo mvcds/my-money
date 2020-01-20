@@ -4,6 +4,7 @@ import { NotificationManager } from 'react-notifications'
 import CreateProjection from 'my-adapters/controllers/projection/create'
 import ReadScenario from 'my-adapters/controllers/scenario/read'
 import CreateEntry from 'my-adapters/controllers/entry/create'
+import UpdateEntry from 'my-adapters/controllers/entry/update'
 
 class FinancialScenario {
   scenario: null;
@@ -11,7 +12,11 @@ class FinancialScenario {
   constructor (app) {
     this.app = app
 
-    this.handleEntryCreation = this.handleEntryCreation.bind(this)
+    const { create } = new CreateEntry(this.app)
+    const { update } = new UpdateEntry(this.app)
+
+    this.handleEntryCreation = this.handleEntryCreation.bind(this, create)
+    this.handleToggleEntryDisabled = this.handleToggleEntryDisabled.bind(this, update)
   }
 
   async start () {
@@ -20,10 +25,8 @@ class FinancialScenario {
     await readScenario.call(this, projection)
   }
 
-  async handleEntryCreation (entry) {
+  async handleEntryCreation (create, entry) {
     if (!this.scenario) return
-
-    const { create } = new CreateEntry(this.app)
 
     const trial = async () => {
       const { projection } = await create({
@@ -41,6 +44,23 @@ class FinancialScenario {
     }
 
     await trial()
+  }
+
+  async handleToggleEntryDisabled (update, entry) {
+    await update({
+      onStart: Function.prototype,
+      onError: (e) => {
+        NotificationManager.error('Toggling failed', 'Toggling failed failed', 5000)
+        console.log(e)
+      },
+      onEnd: Function.prototype,
+      entryId: entry.id,
+      payload: {
+        isDisabled: !entry.isDisabled
+      }
+    })
+
+    this.scenario = this.scenario.clone()
   }
 }
 decorate(FinancialScenario, {

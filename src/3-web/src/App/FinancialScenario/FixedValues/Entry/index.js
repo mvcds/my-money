@@ -1,3 +1,3 @@
-import Component from './entry.visual'
+import Component from './entry.data'
 
 export default Component
