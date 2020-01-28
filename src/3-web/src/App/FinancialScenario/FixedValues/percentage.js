@@ -3,7 +3,7 @@ import React from 'react'
 import formarter from './formarter'
 
 function Percentage ({ value }) {
-  if (Number.isNaN(value)) {
+  if (!Number.isFinite(value)) {
     return <Percentage value={0} />
   }
 

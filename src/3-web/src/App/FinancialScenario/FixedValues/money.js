@@ -3,7 +3,7 @@ import React from 'react'
 import formarter from './formarter'
 
 function Money ({ value }) {
-  if (Number.isNaN(value)) {
+  if (!Number.isFinite(value)) {
     return <Money value={0} />
   }
 
