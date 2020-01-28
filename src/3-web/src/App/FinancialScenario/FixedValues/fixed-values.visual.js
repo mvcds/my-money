@@ -4,7 +4,7 @@ import Money from './money'
 import Percentage from './percentage'
 import Entry from './Entry'
 
-function FixedValues ({ scenario }) {
+function FixedValues ({ incoming, expenses, difference }) {
   return (
     <table className="financial__values">
       <thead>
@@ -22,19 +22,19 @@ function FixedValues ({ scenario }) {
         <tr>
           <th colSpan="4">Incoming</th>
         </tr>
-        <Group entries={scenario.incoming} name="In" />
+        <Group entries={incoming} name="In" />
       </tbody>
       <tbody>
         <tr>
           <th colSpan="4">Expenses</th>
         </tr>
-        <Group entries={scenario.expenses} name="Out" />
+        <Group entries={expenses} name="Out" />
       </tbody>
       <tfoot>
         <tr>
           <th colSpan="2">Yours</th>
-          <Money value={scenario.difference} />
-          <Percentage value={scenario.difference / scenario.incoming.total} />
+          <Money value={difference} />
+          <Percentage value={difference / incoming.total} />
         </tr>
       </tfoot>
     </table>

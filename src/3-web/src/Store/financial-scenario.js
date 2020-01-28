@@ -8,6 +8,7 @@ import UpdateEntry from 'my-adapters/controllers/entry/update'
 
 class FinancialScenario {
   scenario: null;
+  isLoading: true;
 
   constructor (app) {
     this.app = app
@@ -19,10 +20,30 @@ class FinancialScenario {
     this.handleToggleEntryDisabled = this.handleToggleEntryDisabled.bind(this, update)
   }
 
+  get incoming () {
+    return this.scenario ? this.scenario.incoming : {
+      total: 0,
+      entries: []
+    }
+  }
+
+  get expenses () {
+    return this.scenario ? this.scenario.expenses : {
+      total: 0,
+      entries: []
+    }
+  }
+
+  get difference () {
+    return this.scenario ? this.scenario.difference : 0
+  }
+
   async start () {
     const projection = await readProjection.call(this)
 
     await readScenario.call(this, projection)
+
+    this.isLoading = false
   }
 
   async handleEntryCreation (create, entry) {
@@ -65,6 +86,7 @@ class FinancialScenario {
 }
 decorate(FinancialScenario, {
   scenario: observable,
+  isLoading: observable,
   start: action,
   handleEntryCreation: action
 })

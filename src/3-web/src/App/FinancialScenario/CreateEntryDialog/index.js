@@ -1,3 +1,3 @@
-import Component from './create-entry-dialog.state'
+import Component from './create-entry-dialog.data'
 
 export default Component

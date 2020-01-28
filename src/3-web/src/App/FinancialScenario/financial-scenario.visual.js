@@ -1,34 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import FixedValues from './FixedValues'
 import CreateEntryDialog from './CreateEntryDialog'
 
 import './financial-scenario.css'
 
-function FinancialScenario ({
-  scenario,
-  isCreateEntryDialogOpen,
-  onOpenCreateEntryDialog,
-  onCloseCreateEntryDialog,
-  onCreateEntry
-}) {
-  if (!scenario) {
-    return <Loading />
+function FinancialScenario ({ isLoading }) {
+  const [isCreating, setIsCreating] = useState(false)
+
+  if (isLoading) {
+    return <span>LOADING...</span>
   }
 
   return (
     <React.Fragment>
-      <FixedValues scenario={scenario} />
-      <button className="financial__create-button" onClick={onOpenCreateEntryDialog}>
+      <FixedValues />
+      <button className="financial__create-button" onClick={() => setIsCreating(true)}>
         Create Entry
       </button>
-      {isCreateEntryDialogOpen && <CreateEntryDialog onClose={onCloseCreateEntryDialog} onCreateEntry={onCreateEntry} />}
+      {isCreating && <CreateEntryDialog onClose={() => setIsCreating(false)} />}
     </React.Fragment>
   )
-}
-
-function Loading () {
-  return (<span>LOADING...</span>)
 }
 
 export default FinancialScenario
