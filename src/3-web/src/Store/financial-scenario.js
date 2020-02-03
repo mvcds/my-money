@@ -39,6 +39,8 @@ class FinancialScenario {
   }
 
   async start () {
+    this.isLoading = true
+
     const projection = await readProjection.call(this)
 
     await readScenario.call(this, projection)
@@ -50,7 +52,7 @@ class FinancialScenario {
     if (!this.scenario) return
 
     const trial = async () => {
-      const { projection } = await create({
+      await create({
         onStart: Function.prototype,
         onError: (e) => {
           NotificationManager.error('Click here to retry', 'Creating entry failed', 5000, trial, true)
@@ -61,7 +63,8 @@ class FinancialScenario {
         entry
       })
 
-      this.scenario = this.scenario.clone({ projection })
+      // TODO: use a better way to update
+      await this.start()
     }
 
     await trial()
@@ -81,7 +84,8 @@ class FinancialScenario {
       }
     })
 
-    this.scenario = this.scenario.clone()
+    // TODO: use a better way to update
+    await this.start()
   }
 }
 decorate(FinancialScenario, {
