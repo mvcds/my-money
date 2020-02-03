@@ -30,7 +30,11 @@ function Scenario (data) {
 }
 
 function read (entries) {
-  const total = entries.reduce((number, { value }) => number + value, 0)
+  const total = entries.reduce((accumulator, { value, isDisabled }) => {
+    if (isDisabled) return accumulator
+
+    return accumulator + value
+  }, 0)
 
   return {
     total,
@@ -38,7 +42,7 @@ function read (entries) {
       ...array,
       {
         ...entry,
-        share: entry.share(total)
+        share: entry.isDisabled ? 0 : entry.share(total)
       }
     ], [])
   }

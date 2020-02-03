@@ -1,13 +1,9 @@
-function Projection ({ id, title, timestamp, entries: rawEntries }) {
-  const entries = rawEntries.filter(({ isDisabled }) => !isDisabled)
-
+function Projection ({ id, title, timestamp, entries }) {
   Object.assign(this, {
     id,
     title,
     timestamp,
     addEntry (entry) {
-      if (entry.isDisabled) return
-
       entries.push(entry)
     }
   })

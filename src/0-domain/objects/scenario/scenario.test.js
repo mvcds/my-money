@@ -11,12 +11,12 @@ describe('Scenario Object', function () {
     scenario = new Scenario({
       projection: {
         incoming: [
-          EntryFactory.withValue(2).build(),
-          EntryFactory.withValue(3).build(),
-          EntryFactory.withValue(5).build()
+          EntryFactory.withValue(2).build({ isDisabled: false }),
+          EntryFactory.withValue(3).build({ isDisabled: false }),
+          EntryFactory.withValue(5).build({ isDisabled: false })
         ],
         expenses: [
-          EntryFactory.withValue(-4).build()
+          EntryFactory.withValue(-4).build({ isDisabled: false })
         ]
       }
     })

@@ -33,10 +33,6 @@ describe('Projection Entity', function () {
       it('Contains positive values', function () {
         assert.equal(result.includes(1), true)
       })
-
-      it('Ignores disabled positive values', function () {
-        assert.equal(result.length, 1)
-      })
     })
 
     describe('#expenses', function () {
@@ -47,10 +43,6 @@ describe('Projection Entity', function () {
 
       it('Contains negative values', function () {
         assert.equal(result.includes(-1), true)
-      })
-
-      it('Ignores disabled negative values', function () {
-        assert.equal(result.length, 1)
       })
 
       it('Ignores neutral values', function () {
@@ -64,20 +56,6 @@ describe('Projection Entity', function () {
   })
 
   describe('#addEntry', function () {
-    describe('Disabled entry', function () {
-      it('Ignores new entry', function () {
-        const projection = new Projection({
-          entries: [
-            { value: 1, isDisabled: false }
-          ]
-        })
-
-        projection.addEntry({ value: 1, isDisabled: true })
-
-        assert.equal(projection.incoming.length, 1)
-      })
-    })
-
     describe('Enabled entry', function () {
       it('Accepts the new entry', function () {
         const projection = new Projection({
