@@ -13,3 +13,12 @@
 .financial__percentage--negative {
   color: #ff796a;
 }
+
+.financial__entry--disabled td {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
+.financial__entry--disabled td:last-child {
+  opacity: 1;
+}
