@@ -22,3 +22,8 @@
 .financial__entry--disabled td:last-child {
   opacity: 1;
 }
+
+.financial__entry a {
+  color: #1E90FF;
+  text-decoration: inherit;
+}

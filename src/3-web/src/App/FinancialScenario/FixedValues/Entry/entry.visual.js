@@ -12,7 +12,11 @@ function Entry ({ id, source, value, isDisabled, share, onToggleDisabled }) {
 
   return (
     <tr className={classes.join(' ')}>
-      <td>{source}</td>
+      <td>
+        <a href={`#${id}`}>
+          {source}
+        </a>
+      </td>
       <Money value={Math.abs(value)} />
       <Percentage value={share} />
       <td>
