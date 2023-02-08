@@ -4,7 +4,15 @@ This repo was created for me to test the "forcing layering with yarn workspace" 
 
 Something I was writing about on [Code Thoughts](https://medium.com/code-thoughts/stories/published)
 
-## Steps
+## Setup
+
+1. Install [asdf](https://asdf-vm.com/)
+1. Install the asdf's official node plugin
+1. Run `asdf install` on the root, this will make the **current folder** of your terminal to use the appropriate node version
+1. If it's the first time using this node version with asdf, run `npm i -g yarn`
+1. Install the packages
+
+## Replicating the experiment
 
 1. Create package with directories
 1. Create domain layer
@@ -25,11 +33,11 @@ Something I was writing about on [Code Thoughts](https://medium.com/code-thought
 
 ## OBS
 
-* Most packages were created by yarn by running `yarn init -y` in the target folders, the `package.json` was then changed to use a better package name and use version as `0.0.0`
-  * The web layer created with `yarn create react-app my-app --template cypress` run on `src` because I was lazy about configuring a react app
-* When changing things on dependencies, the layer above does not works
-* After creating a new layer, I removed all `node_modules` folders and `yarn.lock` files  (root and workspaces), and rerun `yarn` on the root project - but just because I'm paranoid, you don't need to do it as [things will work ~almost~ all the time](#installing-the-same-dependency-on-same-workspace)
-* For this example app, user cannot read projections directly, so there's no use case for it. If more features need this capability while users don't, the way to go is to create a use case for it BUT not an adapter.
+- Most packages were created by yarn by running `yarn init -y` in the target folders, the `package.json` was then changed to use a better package name and use version as `0.0.0`
+  - The web layer created with `yarn create react-app my-app --template cypress` run on `src` because I was lazy about configuring a react app
+- When changing things on dependencies, the layer above does not works
+- After creating a new layer, I removed all `node_modules` folders and `yarn.lock` files (root and workspaces), and rerun `yarn` on the root project - but just because I'm paranoid, you don't need to do it as [things will work ~almost~ all the time](#installing-the-same-dependency-on-same-workspace)
+- For this example app, user cannot read projections directly, so there's no use case for it. If more features need this capability while users don't, the way to go is to create a use case for it BUT not an adapter.
 
 ## Known issues
 
@@ -39,4 +47,4 @@ By mistake, I have installed the same dependency on the same workspace when I wa
 
 Installing, itself, didn't present any errors, but when I tried to run tests, they were failing, and all I had was a brand new `yarn-error.log`.
 
-Removing all `node_modules` folders and `yarn.lock` files  (root and workspaces), and running `yarn` at root level fixed the problem.
+Removing all `node_modules` folders and `yarn.lock` files (root and workspaces), and running `yarn` at root level fixed the problem.
